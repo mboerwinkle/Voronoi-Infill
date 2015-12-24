@@ -6,5 +6,6 @@ point3d *pointList;
 int main(){
 	srandom(time(NULL));
 	genPoints();
+	calcCenter();	
 	return 0;
 }

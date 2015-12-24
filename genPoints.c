@@ -27,6 +27,7 @@ void genPoints(){//a simple way for simulating what this function really should 
 					}
 				}
 			}
+			printf("%d %d %d\n", pointList[pindex][0], pointList[pindex][1], pointList[pindex][2]);
 			pindex++;
 		}
 	}
