@@ -4,6 +4,7 @@
 #define MAXZ 100000
 #define POINTS 200
 
+typedef int* bitarray;
 typedef int scalar;
 typedef scalar point3d[3];
 typedef scalar point2d[2];
@@ -21,3 +22,9 @@ extern vertex **vertexList;
 extern void genPoints();
 //calculates all the centers
 extern void calcCenter();
+//generates a zeroed bitarray
+extern bitarray genBitarray(int size);
+//sets index bit to value
+extern void setBit(bitarray in, int index, int value);
+//returns value of index bit
+extern int getBit(bitarray in, int index);
