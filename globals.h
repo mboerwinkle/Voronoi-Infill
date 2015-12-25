@@ -17,6 +17,9 @@ typedef struct vertex{
 extern point3d *pointList;
 //array of arrays of vertices on each layer
 extern vertex **vertexList;
+extern int *vertexCount;
+//array of bitarrays of which points are present on each layer
+extern bitarray *pointsPresent;
 
 //allocates memory ot pointList, and generates safe point locations
 extern void genPoints();
