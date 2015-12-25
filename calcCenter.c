@@ -16,11 +16,26 @@ void calcCenter(){
 		pointsPresent[x] = genBitarray(POINTS);
 	}
 
+//unused for now, will be used once I optimize a bit.	int min, max;//the nearest already generated layers
+	vertex *test;
 	for(int count = 0; count < MAXZ; count++){
 		int layer = sequencer(count, MAXZ);
-
-		vertexCount[layer]++;
-		vertexList[layer] = realloc(vertexList[layer], vertexCount[layer]);
+		vertexList[layer] = malloc(sizeof(vertex));
+		vertexCount[layer] = 1;
+		for(int p1 = 0; p1 < POINTS; p1++){
+			for(int p2 = p1+1; p2 < POINTS; p2++){
+				for(int p3 = p2+1; p3 < POINTS; p3++){
+					test = &vertexList[layer][vertexCount[layer]-1];
+					setVertex(layer, p1, p2, p3, test);
+					if(isGoodVertex(layer, *test)){
+						vertexCount[layer]++;
+						vertexList[layer] = realloc(vertexList[layer], sizeof(vertex)*vertexCount[layer]);
+					}
+				}
+			}
+		}
+		vertexCount[layer]--;
+		vertexList[layer] = realloc(vertexList[layer], sizeof(vertex)*vertexCount[layer]);
 
 	}
 }

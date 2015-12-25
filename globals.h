@@ -31,3 +31,7 @@ extern bitarray genBitarray(int size);
 extern void setBit(bitarray in, int index, int value);
 //returns value of index bit
 extern int getBit(bitarray in, int index);
+//generates the center
+extern void setVertex(int layer, int ind1, int ind2, int ind3, vertex* target);
+//checks to see if vertex is valid (AKA has no other points closer than it's parents)
+extern int isGoodVertex(int layer, vertex test);
