@@ -26,7 +26,8 @@ void calcCenter(){
 			for(int p2 = p1+1; p2 < POINTS; p2++){
 				for(int p3 = p2+1; p3 < POINTS; p3++){
 					test = &vertexList[layer][vertexCount[layer]-1];
-					setVertex(layer, p1, p2, p3, test);
+					int ret = setVertex(layer, p1, p2, p3, test);
+					if(ret == 1)/*all three points are in a line*/ continue;
 					if(isGoodVertex(layer, *test)){
 						vertexCount[layer]++;
 						vertexList[layer] = realloc(vertexList[layer], sizeof(vertex)*vertexCount[layer]);
@@ -34,7 +35,7 @@ void calcCenter(){
 				}
 			}
 		}
-		vertexCount[layer]--;
+		vertexCount[layer]--;//we allocated memory in advance, so now that it's over, we must get rid of our excess memory.
 		vertexList[layer] = realloc(vertexList[layer], sizeof(vertex)*vertexCount[layer]);
 
 	}

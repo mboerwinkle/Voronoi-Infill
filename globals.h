@@ -33,6 +33,8 @@ extern void setBit(bitarray in, int index, int value);
 //returns value of index bit
 extern int getBit(bitarray in, int index);
 //generates the center
-extern void setVertex(int layer, int ind1, int ind2, int ind3, vertex* target);
+extern int setVertex(int layer, int ind1, int ind2, int ind3, vertex* target);
 //checks to see if vertex is valid (AKA has no other points closer than it's parents)
 extern int isGoodVertex(int layer, vertex test);
+//calculates the intersection of two 2d lines. returns 1 if points are parallel.
+extern int lineIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, int* x, int* y);
