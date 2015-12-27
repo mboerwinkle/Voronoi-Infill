@@ -6,6 +6,9 @@
 scalar distance2d(point2d a, point2d b){
 	return sqrt((a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]));
 }
+scalar distance3dsq(point3d a, point3d b){
+	return (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1])+(a[2]-b[2])*(a[2]-b[2]);
+}
 scalar radsq(point3d targ, int layer){//cite
 	int zdist = abs(layer-targ[2]);
 	return -(zdist-KONSTANT)*(zdist+KONSTANT);//overflow

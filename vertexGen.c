@@ -32,6 +32,3 @@ int setVertex(int layer, int ind1, int ind2, int ind3, vertex* target){
 	if(lineIntersect2d(a1, a2, b1, b2, &target->loc[0], &target->loc[1]) == 1) return 1;
 	return 0;
 }
-int isGoodVertex(int layer, vertex test){
-	return 1;	
-}
