@@ -16,6 +16,7 @@ void layer_to_ascii(int layer){
 	bitarray loc = genBitarray(ASCIIX*ASCIIY);
 	int x, y;
 	for(int temp = 0; temp < vertexCount[layer]; temp++){
+		puts("hi");
 		x = vertexList[layer][temp].loc[0]/(maxx/ASCIIX-1);
 		y = vertexList[layer][temp].loc[1]/(maxy/ASCIIY-1);
 		setBit(loc, x+y*ASCIIX, 1);
@@ -24,8 +25,9 @@ void layer_to_ascii(int layer){
 		for(int xcycle = 0; xcycle < ASCIIX; xcycle++){
 			if(getBit(loc, xcycle+ycycle*ASCIIX)){
 				printf("0");
-			}else printf(" ");
+			}else printf(".");
 		}
 		printf("\n");
 	}
+	free(loc);
 }
