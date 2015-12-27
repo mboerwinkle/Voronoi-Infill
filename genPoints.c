@@ -5,20 +5,20 @@
 #define MINDIST 5000//completely arbitrary
 extern int placementConflicts(int placedIndex, int testIndex);
 void genPoints(){//a simple way for simulating what this function really should do (to be replaced with settling method)
-	pointList = calloc(POINTS, sizeof(point3d));
-	int quantity[MAXZ];//how many points on each layer
+	pointList = calloc(points, sizeof(point3d));
+	int quantity[maxz];//how many points on each layer
 	int pindex = 0;//which point we are setting
 	memset(quantity, 0, sizeof(quantity));
-	for(int count = 0; count < POINTS; count++){
-		quantity[random()%MAXZ]++;
+	for(int count = 0; count < points; count++){
+		quantity[random()%maxz]++;
 	}
-	for(int layer = 0; layer < MAXZ; layer++){
+	for(int layer = 0; layer < maxz; layer++){
 		for(; quantity[layer] > 0; quantity[layer]--){
 			int good = 0;
 			while(!good){
 				good = 1;
-				pointList[pindex][0] = random()%MAXX;
-				pointList[pindex][1] = random()%MAXY;
+				pointList[pindex][0] = random()%maxx;
+				pointList[pindex][1] = random()%maxy;
 				pointList[pindex][2] = layer;
 				for(int testIndex = 0; testIndex < pindex; testIndex++){
 					if(placementConflicts(pindex, testIndex)){

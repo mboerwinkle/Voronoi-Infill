@@ -9,11 +9,11 @@ bitarray *pointsPresent;
 extern int sequencer(int count, int max);
 
 void calcCenter(){
-	vertexList = calloc(MAXZ, sizeof(vertex*));
-	vertexCount = calloc(MAXZ, sizeof(int));
-	pointsPresent = calloc(MAXZ, sizeof(bitarray));
-	for(int x = 0; x < MAXZ; x++){
-		pointsPresent[x] = genBitarray(POINTS);
+	vertexList = calloc(maxz, sizeof(vertex*));
+	vertexCount = calloc(maxz, sizeof(int));
+	pointsPresent = calloc(maxz, sizeof(bitarray));
+	for(int x = 0; x < maxz; x++){
+		pointsPresent[x] = genBitarray(points);
 	}
 
 //unused for now, will be used once I optimize a bit.	int min, max;//the nearest already generated layers
@@ -21,13 +21,13 @@ void calcCenter(){
 	scalar radiussq;
 	int good;
 	point3d vertex3deq;
-	for(int count = 0; count < MAXZ; count++){
-		int layer = sequencer(count, MAXZ);
+	for(int count = 0; count < maxz; count++){
+		int layer = sequencer(count, maxz);
 		vertexList[layer] = malloc(sizeof(vertex));
 		vertexCount[layer] = 0;
-		for(int p1 = 0; p1 < POINTS; p1++){
-			for(int p2 = p1+1; p2 < POINTS; p2++){
-				for(int p3 = p2+1; p3 < POINTS; p3++){
+		for(int p1 = 0; p1 < points; p1++){
+			for(int p2 = p1+1; p2 < points; p2++){
+				for(int p3 = p2+1; p3 < points; p3++){
 					test = &vertexList[layer][vertexCount[layer]];
 					int ret = setVertex(layer, p1, p2, p3, test);
 					if(ret == 0)/*all three points are in a line*/ continue;
@@ -36,7 +36,7 @@ void calcCenter(){
 					vertex3deq[1] = test->loc[1];
 					vertex3deq[2] = layer;
 					radiussq = distance3dsq(pointList[p1], vertex3deq);
-					for(int temp = 0; temp < POINTS; temp++){
+					for(int temp = 0; temp < points; temp++){
 						if(temp == p1||temp == p2||temp == p3) continue;
 						if(vertex3deq[0] == 0&&vertex3deq[1] == 0) puts("1");
 						if(distance3dsq(pointList[temp], vertex3deq) < radiussq){

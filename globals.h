@@ -1,9 +1,4 @@
-//these MAX values are exclusive.
-#define MAXX 100000//in micrometers (10cm)
-#define MAXY 100000
-#define MAXZ 200
-#define POINTS 200
-
+extern int maxx, maxy, maxz, points;
 typedef int* bitarray;
 typedef int scalar;
 typedef scalar point3d[3];
