@@ -37,3 +37,7 @@ extern void planeIntersect(int layer, point3d one, point3d two, point2d ret);
 extern scalar distance2d(point2d a, point2d b);
 //3d distance squared (to avoid the nasty squareroot)
 extern scalar distance3dsq(point3d a, point3d b);
+//displays the voronoi diagram. This description intentionally left ambiguous
+extern void display();
+//prints the specified layer as ascii art
+extern void layer_to_ascii(int layer);
