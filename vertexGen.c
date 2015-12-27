@@ -29,6 +29,5 @@ int setVertex(int layer, int ind1, int ind2, int ind3, vertex* target){
 	b2[0] = b1[0]+cvx;
 	b2[1] = b1[1]+cvy;
 	//Now, we have four 2d points. these four points express two lines. the intersection of these lines is the vertex of the three 3d points.
-	if(lineIntersect2d(a1, a2, b1, b2, &target->loc[0], &target->loc[1]) == 1) return 1;
-	return 0;
+	return lineIntersect2d(a1, a2, b1, b2, &(target->loc[0]), &(target->loc[1]));
 }
