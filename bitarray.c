@@ -12,3 +12,10 @@ void setBit(bitarray in, int index, int value){
 int getBit(bitarray in, int index){
 	return ((in[index/BITS])>>(index%BITS))&1;
 }
+void printBitarray(bitarray in, int size){
+	for(int x = 0; x < size; x++){
+		if(getBit(in, x)) printf("1");
+		else printf("0");
+	}
+	printf("\n");
+}
