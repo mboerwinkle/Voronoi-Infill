@@ -31,3 +31,6 @@ run
 
 # Debug files
 *.dSYM/
+
+# vim temporary files
+.*.swp
