@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "globals.h"
 
-//returns the closest equidistant point on the given plane (layer) to the two points. Also known as the weighted midpoint function that is given two 3d points instead of two weighted 2d points.
-extern void planeIntersect(int layer, point3d one, point3d two, point2d ret);
-
 int setVertex(int layer, int ind1, int ind2, int ind3, vertex* target){
 	point3d *p1 = &pointList[ind1];
 	point3d *p2 = &pointList[ind2];
