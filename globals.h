@@ -1,6 +1,6 @@
 extern int maxx, maxy, maxz, points;
 typedef int* bitarray;
-typedef int scalar;
+typedef long int scalar;
 typedef scalar point3d[3];
 typedef scalar point2d[2];
 typedef struct vertex{
@@ -32,7 +32,7 @@ extern char* printBitarray(bitarray in, int size);
 //generates the center
 extern int setVertex(int layer, int ind1, int ind2, int ind3, vertex* target);
 //calculates the intersection of two 2d lines. returns 1 if points are parallel.
-extern int lineIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, int* x, int* y);
+extern int lineIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, scalar* x, scalar* y);
 //returns the closest equidistant point on the given plane (layer) to the two points. Also known as the weighted midpoint function that is given two 3d points instead of two weighted 2d points.
 extern void planeIntersect(int layer, point3d one, point3d two, point2d ret);
 //2d distance
