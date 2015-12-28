@@ -6,7 +6,14 @@ scalar distance2d(point2d a, point2d b){
 	return sqrt((a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]));
 }
 scalar distance3dsq(point3d a, point3d b){
-	return (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1])+(a[2]-b[2])*(a[2]-b[2]);
+//	return (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1])+(a[2]-b[2])*(a[2]-b[2]);
+//this is to check for overflow. odds are that if overflow is a problem then I would eventually get a distance that was shorter than the difference of one of their coordinates
+	int xdif = (a[0]-b[0])*(a[0]-b[0]);
+	int ydif = (a[0]-b[0])*(a[0]-b[0]);
+	int zdif = (a[0]-b[0])*(a[0]-b[0]);
+	int ret = xdif+ydif+zdif;
+	if(ret < xdif || ret < ydif || ret < zdif) puts("see distance3dsq. Overflow detected");
+	return ret;
 }
 scalar radsq(point3d targ, int layer){//cite
 	int konstant = maxz+1;
