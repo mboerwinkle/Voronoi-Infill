@@ -13,5 +13,6 @@ int bitarrayTest(){
 	}
 	char * ret = printBitarray(test, 40);
 	if(strncmp(ret, "1010101010101010101010101010101010101010", 40) != 0) return 1;
+	free(ret);
 	return 0;
 }
