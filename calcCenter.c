@@ -38,13 +38,13 @@ void calcCenter(){
 					radiussq = distance3dsq(pointList[p1], vertex3deq);
 					for(int temp = 0; temp < points; temp++){
 						if(temp == p1||temp == p2||temp == p3) continue;
-						if(vertex3deq[0] == 0&&vertex3deq[1] == 0) puts("1");
 						if(distance3dsq(pointList[temp], vertex3deq) < radiussq){
 							good = 0;
 							break;
 						}
 					}
 					if(good){
+						puts("found a good one!");
 						vertexCount[layer]++;
 						vertexList[layer] = realloc(vertexList[layer], sizeof(vertex)*(vertexCount[layer]+1));
 					}
@@ -53,6 +53,7 @@ void calcCenter(){
 		}
 		vertexList[layer] = realloc(vertexList[layer], sizeof(vertex)*vertexCount[layer]);
 
+		printf("%d vertices\n", vertexCount[layer]);
 	}
 }
 

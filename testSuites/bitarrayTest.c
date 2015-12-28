@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "globals.h"
+#include "../globals.h"
 
 int bitarrayTest(){
 	bitarray test = genBitarray(40);
