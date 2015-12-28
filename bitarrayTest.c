@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "globals.h"
 
 int bitarrayTest(){
@@ -10,7 +11,7 @@ int bitarrayTest(){
 	for(int x = 0; x < 40; x+=2){
 		setBit(test, x, 2);
 	}
-	printBitarray(test, 40);
-	printf("should be equal to:\n1010101010101010101010101010101010101010\n");
+	char * ret = printBitarray(test, 40);
+	if(strncmp(ret, "1010101010101010101010101010101010101010", 40) != 0) return 1;
 	return 0;
 }

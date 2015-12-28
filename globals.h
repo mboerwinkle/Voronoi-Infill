@@ -27,8 +27,8 @@ extern bitarray genBitarray(int size);
 extern void setBit(bitarray in, int index, int value);
 //returns value of index bit
 extern int getBit(bitarray in, int index);
-//prints out the string representation of bitarray
-extern void printBitarray(bitarray in, int size);
+//returns the string representation of bitarray
+extern char* printBitarray(bitarray in, int size);
 //generates the center
 extern int setVertex(int layer, int ind1, int ind2, int ind3, vertex* target);
 //calculates the intersection of two 2d lines. returns 1 if points are parallel.

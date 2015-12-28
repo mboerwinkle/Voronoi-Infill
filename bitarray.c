@@ -12,10 +12,11 @@ void setBit(bitarray in, int index, int value){
 int getBit(bitarray in, int index){
 	return ((in[index/BITS])>>(index%BITS))&1;
 }
-void printBitarray(bitarray in, int size){
+char* printBitarray(bitarray in, int size){
+	char * ret = calloc(size, sizeof(char));
 	for(int x = 0; x < size; x++){
-		if(getBit(in, x)) printf("1");
-		else printf("0");
+		if(getBit(in, x)) ret[x] = '1';
+		else ret[x] = '0';
 	}
-	printf("\n");
+	return ret;
 }
