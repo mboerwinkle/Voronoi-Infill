@@ -30,7 +30,9 @@ void calcCenter(){
 				for(int p3 = p2+1; p3 < points; p3++){
 					test = &vertexList[layer][vertexCount[layer]];
 					int ret = setVertex(layer, p1, p2, p3, test);
-					if(ret == 0)/*all three points are in a line*/ continue;
+					puts("got here!");
+					if(ret == 0) continue;
+					puts("got through!");
 					good = 1;
 					vertex3deq[0] = test->loc[0];
 					vertex3deq[1] = test->loc[1];

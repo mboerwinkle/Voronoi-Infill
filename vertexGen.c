@@ -28,6 +28,10 @@ int setVertex(int layer, int ind1, int ind2, int ind3, vertex* target){
 
 	b2[0] = b1[0]+cvx;
 	b2[1] = b1[1]+cvy;
+	//delete this
+//		getchar();
+//		printf("%ld %ld\n%ld %ld\n%ld %ld\n%ld %ld\n", a1[0], a1[1], a2[0], a2[1], b1[0], b1[1], b2[0], b2[1]); 
+	//
 	//Now, we have four 2d points. these four points express two lines. the intersection of these lines is the vertex of the three 3d points.
 	return lineIntersect2d(a1, a2, b1, b2, &(target->loc[0]), &(target->loc[1]));
 }
