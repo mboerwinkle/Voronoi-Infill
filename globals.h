@@ -27,6 +27,8 @@ extern bitarray genBitarray(int size);
 extern void setBit(bitarray in, int index, int value);
 //returns value of index bit
 extern int getBit(bitarray in, int index);
+//ORs two identically sized bitarrays and returns the resultant bitarray
+extern bitarray ORBitarray(bitarray one, bitarray two, int size);
 //returns the string representation of bitarray
 extern char* printBitarray(bitarray in, int size);
 //generates the center
