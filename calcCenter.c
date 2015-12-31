@@ -23,16 +23,15 @@ void calcCenter(){
 	point3d vertex3deq;
 	for(int count = 0; count < maxz; count++){
 		int layer = sequencer(count, maxz);
-		vertexList[layer] = malloc(sizeof(vertex));
+		vertexList[layer] = (vertex*)malloc(sizeof(vertex));
 		vertexCount[layer] = 0;
-		for(int p1 = 0; p1 < points; p1++){
-			for(int p2 = p1+1; p2 < points; p2++){
-				for(int p3 = p2+1; p3 < points; p3++){
+		int p1, p2, p3, ret;
+		for(p1 = 0; p1 < points; p1++){
+			for(p2 = p1+1; p2 < points; p2++){
+				for(p3 = p2+1; p3 < points; p3++){
 					test = &vertexList[layer][vertexCount[layer]];
-					int ret = setVertex(layer, p1, p2, p3, test);
-					puts("got here!");
+					ret = setVertex(layer, p1, p2, p3, test);
 					if(ret == 0) continue;
-					puts("got through!");
 					good = 1;
 					vertex3deq[0] = test->loc[0];
 					vertex3deq[1] = test->loc[1];
@@ -46,9 +45,8 @@ void calcCenter(){
 						}
 					}
 					if(good){
-						puts("found a good one!");
 						vertexCount[layer]++;
-						vertexList[layer] = realloc(vertexList[layer], sizeof(vertex)*(vertexCount[layer]+1));
+						vertexList[layer] = (vertex*)realloc(vertexList[layer], sizeof(vertex)*(vertexCount[layer]+1));
 					}
 				}
 			}

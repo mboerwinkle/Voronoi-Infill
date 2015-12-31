@@ -5,7 +5,7 @@
 #define MINDIST 50//completely arbitrary
 extern int placementConflicts(int placedIndex, int testIndex);
 void genPoints(){//a simple way for simulating what this function really should do (to be replaced with settling method)
-	pointList = calloc(points, sizeof(point3d));
+	pointList = (point3d*)calloc(points, sizeof(point3d));
 	int quantity[maxz];//how many points on each layer
 	int pindex = 0;//which point we are setting
 	memset(quantity, 0, sizeof(quantity));
@@ -27,7 +27,6 @@ void genPoints(){//a simple way for simulating what this function really should 
 					}
 				}
 			}
-//			printf("%d %d %d\n", pointList[pindex][0], pointList[pindex][1], pointList[pindex][2]);
 			pindex++;
 		}
 	}

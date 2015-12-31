@@ -14,18 +14,22 @@ void display(){
 }
 void layer_to_ascii(int layer){
 	bitarray loc = genBitarray(ASCIIX*ASCIIY);
-	int x, y;
+	scalar x, y, origx, origy;
 	for(int temp = 0; temp < vertexCount[layer]; temp++){
-		puts("hi");
-		x = vertexList[layer][temp].loc[0]/(maxx/ASCIIX-1);
-		y = vertexList[layer][temp].loc[1]/(maxy/ASCIIY-1);
-		setBit(loc, x+y*ASCIIX, 1);
+		origx = vertexList[layer][temp].loc[0];
+		origy = vertexList[layer][temp].loc[1];
+		if(origx < 0 || origx >= maxx || origy < 0 || origy >= maxy) continue;
+		x = (origx*(ASCIIX-1))/maxx;
+		y = (origy*(ASCIIY-1))/maxy;
+		int index = x+y*ASCIIX;
+		if(index >= ASCIIX*ASCIIY) puts("goteem");
+		setBit(loc, index, 1);
 	}
 	for(int ycycle = 0; ycycle < ASCIIY; ycycle++){
 		for(int xcycle = 0; xcycle < ASCIIX; xcycle++){
 			if(getBit(loc, xcycle+ycycle*ASCIIX)){
-				printf("0");
-			}else printf(".");
+				printf("O");
+			}else printf("-");
 		}
 		printf("\n");
 	}

@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "../globals.h"
 extern int bitarrayTest();
-extern int distance3dsqTest();
+extern int planeIntersectTest();
 void testSuite(){
 	if(bitarrayTest()) puts("bitarrayTest failed.");
-	if(distance3dsqTest()) puts("distance3dsqTest failed");
+	if(planeIntersectTest()) puts("planeIntersectTest failed");
 }
