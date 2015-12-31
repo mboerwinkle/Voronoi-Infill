@@ -12,6 +12,13 @@ void setBit(bitarray in, int index, int value){
 int getBit(bitarray in, int index){
 	return ((in[index/BITS])>>(index%BITS))&1;
 }
+bitarray ORBitarray(bitarray one, bitarray two, int size){
+	bitarray ret = genBitarray(size);
+	for(int loc = size/(BITS+1); loc >= 0; loc--){
+		ret[loc] = one[loc]|two[loc];
+	}
+	return ret;
+}
 char* printBitarray(bitarray in, int size){
 	char * ret = calloc(size, sizeof(char));
 	for(int x = 0; x < size; x++){

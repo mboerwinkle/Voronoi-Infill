@@ -1,0 +1,4 @@
+make ORBitarray test suite
+make genBitarray/setBit/getBit macros?
+make binary search layer gen
+add in physics movement
