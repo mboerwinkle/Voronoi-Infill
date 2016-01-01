@@ -34,3 +34,10 @@ int setVertex(int layer, int ind1, int ind2, int ind3, vertex* target){
 	//Now, we have four 2d points. these four points express two lines. the intersection of these lines is the vertex of the three 3d points.
 	return lineIntersect2d(a1, a2, b1, b2, &(target->loc[0]), &(target->loc[1]));
 }
+int getSharedParentCount(vertex a, vertex b){
+	int ret = 0;
+	if(a.parents[0] == b.parents[0] || a.parents[0] == b.parents[1] || a.parents[0] == b.parents[2]) ret++;
+	if(a.parents[1] == b.parents[0] || a.parents[1] == b.parents[1] || a.parents[1] == b.parents[2]) ret++;
+	if(a.parents[2] == b.parents[0] || a.parents[2] == b.parents[1] || a.parents[2] == b.parents[2]) ret++;
+	return ret;
+}

@@ -39,7 +39,9 @@ void closeSDLwindow(){
 	SDL_Quit();
 }
 void layer_to_SDL(int layer){
-	
+	for(int temp = 0; temp < vertexCount[layer]; temp++){
+		
+	}
 }
 void drawLine(int x1, int y1, int x2, int y2){
 //	SDL_SetRenderDrawColor(render, 200, 0, 255, 255);

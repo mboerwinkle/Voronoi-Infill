@@ -51,3 +51,5 @@ extern void layer_to_SDL(int layer);
 extern void progressBar(int count, int max);
 extern void openSDLwindow();
 extern void closeSDLwindow();
+//returns number of shared parents of two vertices
+extern int getSharedParentCount(vertex a, vertex b);
