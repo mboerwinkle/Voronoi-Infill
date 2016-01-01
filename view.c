@@ -39,9 +39,19 @@ void closeSDLwindow(){
 	SDL_Quit();
 }
 void layer_to_SDL(int layer){
+	clearScreen();
+	SDL_SetRenderDrawColor(render, 255,255,255,255);
+	vertex *A, *B;
 	for(int temp = 0; temp < vertexCount[layer]; temp++){
-		
+		A = &vertexList[layer][temp];
+		for(int test = temp+1; test < vertexCount[layer]; test++){
+			B = &vertexList[layer][test];
+			if(getSharedParentCount(*A, *B) == 2){
+				drawLine(A->loc[0]*WIDTH/maxx, A->loc[1]*HEIGHT/maxy, B->loc[0]*WIDTH/maxx, B->loc[1]*HEIGHT/maxy);
+			}
+		}
 	}
+	paint();
 }
 void drawLine(int x1, int y1, int x2, int y2){
 //	SDL_SetRenderDrawColor(render, 200, 0, 255, 255);

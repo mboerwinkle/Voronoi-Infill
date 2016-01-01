@@ -1,3 +1,4 @@
+fix dat thing where the display doesnt display every line
 make ORBitarray test suite
 make genBitarray/setBit/getBit macros?
 make binary search layer gen
