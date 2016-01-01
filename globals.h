@@ -45,3 +45,9 @@ extern scalar distance3dsq(point3d a, point3d b);
 extern void display();
 //prints the specified layer as ascii art
 extern void layer_to_ascii(int layer);
+//prints the specified layer in an SDL window
+extern void layer_to_SDL(int layer);
+//prints a progress bar to terminal
+extern void progressBar(int count, int max);
+extern void openSDLwindow();
+extern void closeSDLwindow();
