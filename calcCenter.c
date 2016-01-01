@@ -22,7 +22,7 @@ void calcCenter(){
 	int good;
 	point3d vertex3deq;
 	for(int count = 0; count < maxz; count++){
-		progressBar((count*20)/(maxz-1), 20);
+		progressBar(((count+1)*20)/(maxz), 20);
 		int layer = sequencer(count, maxz);
 		vertexList[layer] = (vertex*)malloc(sizeof(vertex));
 		vertexCount[layer] = 0;
@@ -56,6 +56,7 @@ void calcCenter(){
 
 //		printf("%d vertices\n", vertexCount[layer]);
 	}
+	printf("\n");//for making a newline after the progress bar
 }
 
 int sequencer(int count, int max){

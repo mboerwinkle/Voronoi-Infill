@@ -3,17 +3,25 @@ typedef int* bitarray;
 typedef long int scalar;
 typedef scalar point3d[3];
 typedef scalar point2d[2];
+//vertices and nodes are mostly the same, it's just that vertices contain the info of their parents, while nodes contain the info of their sibling nodes. Nodes are used because they are better for path generation
+//temporary. Eventually, calcCenter will generate nodes exclusively, and use vertices as intermediaries
 typedef struct vertex{
 	point2d loc;
 	point3d *parents[3];
 }vertex;
-
+typedef struct node{
+	point2d loc;
+	int sibCount;
+	struct node *sibs[3];
+}node;
 //list of all starting points
 extern point3d *pointList;
 //array of arrays of vertices on each layer
 extern vertex **vertexList;
 //array of length of each array of vertexList
 extern int *vertexCount;
+//array of arrays of nodes on each layer
+extern node **nodeList;
 //array of bitarrays of which points are present on each layer
 extern bitarray *pointsPresent;
 
@@ -21,6 +29,8 @@ extern bitarray *pointsPresent;
 extern void genPoints();
 //calculates all the vertices (centers is the term I used to use)
 extern void calcCenter();
+//calculates nodes based on the vertices. (a pair of connected nodes shares two parents)
+extern void genNodes();
 //generates a zeroed bitarray
 extern bitarray genBitarray(int size);
 //sets index bit to value

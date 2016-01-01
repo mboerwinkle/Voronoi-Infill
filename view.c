@@ -51,6 +51,17 @@ void layer_to_SDL(int layer){
 			}
 		}
 	}
+	SDL_SetRenderDrawColor(render, 255,5,5,255);
+	node *An, *Bn;
+	for(int temp = 0; temp < vertexCount[layer]; temp++){
+		An = &nodeList[layer][temp];
+		for(int test = temp+1; test < vertexCount[layer]; test++){
+			Bn = &nodeList[layer][test];
+			if((An->sibs[0] == Bn) ^ (An->sibs[1] == Bn) ^ (An->sibs[2] == Bn)){
+				drawLine(An->loc[0]*WIDTH/maxx, An->loc[1]*HEIGHT/maxy, Bn->loc[0]*WIDTH/maxx, Bn->loc[1]*HEIGHT/maxy);
+			}
+		}
+	}
 	paint();
 }
 void drawLine(int x1, int y1, int x2, int y2){

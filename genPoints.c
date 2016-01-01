@@ -13,7 +13,10 @@ void genPoints(){//a simple way for simulating what this function really should 
 		quantity[random()%maxz]++;
 	}
 	for(int layer = 0; layer < maxz; layer++){
-		for(; quantity[layer] > 0; quantity[layer]--){
+		for(int tempcount = 0; tempcount < quantity[layer]; tempcount++){
+/*			pointList[pindex][0] = (pindex%3)*1000;
+			pointList[pindex][1] = (pindex/3)*1000;
+			pointList[pindex][2] = 0;*/
 			int good = 0;
 			while(!good){
 				good = 1;

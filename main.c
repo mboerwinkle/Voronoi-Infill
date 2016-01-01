@@ -21,12 +21,10 @@ int main(int argc, char *argv[]){
 	points = atoi(argv[4]);
 	printf(" maxx:%d\n maxy:%d\n maxz:%d\n points:%d\n", maxx, maxy, maxz, points);
 	srandom(time(NULL));
-//cool! how nice! this code is nicely divided into three parts:
-//generate the starting points
-//go through and generate the voronoi diagram
-//and do whatever you want to do with the voronoi diagram! (in this case, display it!)
+	
 	genPoints();
 	calcCenter();	
+	genNodes();
 	display();
 	return 0;
 }

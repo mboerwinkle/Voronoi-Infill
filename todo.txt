@@ -1,5 +1,7 @@
 fix dat thing where the display doesnt display every line
+make not every layer be generated
 make ORBitarray test suite
 make genBitarray/setBit/getBit macros?
 make binary search layer gen
 add in physics movement
+make calcCenter directly create nodes

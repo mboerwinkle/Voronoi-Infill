@@ -13,6 +13,7 @@ void display(){
 		layer_to_SDL(layer);
 		getchar();
 	}
+	getchar();
 	closeSDLwindow();
 }
 void layer_to_ascii(int layer){
@@ -22,10 +23,9 @@ void layer_to_ascii(int layer){
 		origx = vertexList[layer][temp].loc[0];
 		origy = vertexList[layer][temp].loc[1];
 		if(origx < 0 || origx >= maxx || origy < 0 || origy >= maxy) continue;
-		x = (origx*(ASCIIX-1))/maxx;
-		y = (origy*(ASCIIY-1))/maxy;
+		x = (origx*(ASCIIX))/maxx;
+		y = (origy*(ASCIIY))/maxy;
 		int index = x+y*ASCIIX;
-		if(index >= ASCIIX*ASCIIY) puts("goteem");
 		setBit(loc, index, 1);
 	}
 	for(int ycycle = 0; ycycle < ASCIIY; ycycle++){
