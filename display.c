@@ -9,11 +9,9 @@ void display(){
 	scanf("%d", &div);
 	openSDLwindow();
 	for(int layer = 0; layer < maxz; layer+=div){
-		layer_to_ascii(layer);
-		layer_to_SDL(layer);
 		getchar();
+		layer_to_SDL(layer);
 	}
-	getchar();
 	closeSDLwindow();
 }
 void layer_to_ascii(int layer){
