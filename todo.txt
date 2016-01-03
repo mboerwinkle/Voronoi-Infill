@@ -5,3 +5,5 @@ make genBitarray/setBit/getBit macros?
 make binary search layer gen
 add in physics movement
 make calcCenter directly create nodes
+make sure functions are passed by reference
+make sure functions decrement to 0, not increment to a value(to check if neccessary)

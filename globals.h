@@ -14,6 +14,12 @@ typedef struct node{
 	int sibCount;
 	struct node *sibs[3];
 }node;
+//list of all boundary points (for cropping)
+extern point2d *bP;
+//point inside of bounds
+extern point2d insideBounds;
+//count of boundary points
+extern long int bPcount;
 //list of all starting points
 extern point3d *pointList;
 //array of arrays of vertices on each layer
@@ -63,3 +69,5 @@ extern void openSDLwindow();
 extern void closeSDLwindow();
 //returns number of shared parents of two vertices
 extern int getSharedParentCount(vertex a, vertex b);
+//crops all nodes to the inside of the boundary points
+extern void cropNodes();
