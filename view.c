@@ -40,6 +40,9 @@ void closeSDLwindow(){
 }
 void layer_to_SDL(int layer){
 	clearScreen();
+	for(int pnt = 0; pnt < points; pnt++){
+		drawPoint(pointList[pnt][0]*WIDTH/maxx, pointList[pnt][1]*HEIGHT/maxy, 1);
+	}
 	SDL_SetRenderDrawColor(render, 255,255,255,255);
 	vertex *A, *B;
 	for(int temp = 0; temp < vertexCount[layer]; temp++){

@@ -23,7 +23,7 @@ void calcCenter(){
 	scalar radiussq;
 	int good;
 	point3d vertex3deq;
-	for(int count = 0; count < maxz; count++){
+	for(int count = 0; count < maxz; count+=step){
 		progressBar(((count+1)*20)/(maxz), 20);
 		int layer = sequencer(count, maxz);
 		vertexList[layer] = (vertex*)malloc(sizeof(vertex));

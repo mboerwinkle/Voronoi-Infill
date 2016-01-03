@@ -10,6 +10,7 @@ void display(){
 	openSDLwindow();
 	for(int layer = 0; layer < maxz; layer+=div){
 		getchar();
+		layer_to_ascii(layer);
 		layer_to_SDL(layer);
 	}
 	closeSDLwindow();

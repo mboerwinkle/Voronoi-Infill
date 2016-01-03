@@ -1,4 +1,4 @@
-extern int maxx, maxy, maxz, points;
+extern int maxx, maxy, maxz, points, step;
 typedef int* bitarray;
 typedef long int scalar;
 typedef scalar point3d[3];

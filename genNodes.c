@@ -7,7 +7,7 @@ void genNodes(){
 	vertex* thisvertex;
 	nodeList = calloc(maxz, sizeof(node*));
 	int temp, test;
-	for(int layer = 0; layer < maxz; layer++){
+	for(int layer = 0; layer < maxz; layer+=step){
 		nodeList[layer] = (node*)calloc(vertexCount[layer], sizeof(node));
 		for(temp = 0; temp < vertexCount[layer]; temp++){
 			thisnode = &nodeList[layer][temp];
