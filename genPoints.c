@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "globals.h"
-#define MINDIST 500000//completely arbitrary
+#define MINDIST 50000//completely arbitrary
 extern int placementConflicts(int placedIndex, int testIndex);
 void genPoints(){//a simple way for simulating what this function really should do (to be replaced with settling method)
 	pointList = (point3d*)calloc(points, sizeof(point3d));

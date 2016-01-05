@@ -7,3 +7,4 @@ add in physics movement
 make calcCenter directly create nodes
 make sure functions are passed by reference
 make sure functions decrement to 0, not increment to a value(to check if neccessary)
+make nodes reference each other by index, not pointer (problems when reallocing)

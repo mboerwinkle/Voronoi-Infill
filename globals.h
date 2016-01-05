@@ -12,7 +12,7 @@ typedef struct vertex{
 typedef struct node{
 	point2d loc;
 	int sibCount;
-	struct node *sibs[3];
+	int sibs[3];
 }node;
 //list of all boundary points (for cropping)
 extern point2d *bP;
