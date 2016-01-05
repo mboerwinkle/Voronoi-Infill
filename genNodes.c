@@ -16,13 +16,13 @@ void genNodes(){
 			thisnode->loc[1] = thisvertex->loc[1];
 			for(test = temp+1; test < vertexCount[layer]; test++){
 				if(getSharedParentCount(vertexList[layer][test], *thisvertex) == 2){
-					testnode = &nodeList[layer][test];
+					testnode = &(nodeList[layer][test]);
 					if(thisnode->sibCount == 3 || testnode->sibCount == 3){
 						puts("too far");
 						continue;
 					}
-					thisnode->sibs[thisnode->sibCount] = testnode;
-					testnode->sibs[testnode->sibCount] = thisnode;
+					thisnode->sibs[thisnode->sibCount] = test;
+					testnode->sibs[testnode->sibCount] = temp;
 					thisnode->sibCount++;
 					testnode->sibCount++;
 				}
