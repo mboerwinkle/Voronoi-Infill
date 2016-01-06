@@ -12,6 +12,9 @@ extern void midpoint2d(point2d A, point2d B, point2d* ret);
 extern int findNodePointer(int targ, node *orig);
 extern int lineSegIntersect2dNoRet(point2d a1, point2d a2, point2d b1, point2d b2);
 extern int lineSegIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, point2d* sect/*for inter'sect*/);
+extern point2d* intersectsBound(point2d A, point2d B, int* howmany);
+extern void sortPointList(point2d start, point2d* inter, int size);
+extern void drawPoint(int x, int y, int color);//FIXME
 void cropNodes(){
 	insideBounds[0] = 3000;
 	insideBounds[1] = 3000;
@@ -38,12 +41,13 @@ void cropNodes(){
 }
 void cropNodesLayer(int layer){
 	int ind1, ind2;
-	for(int x = 0; x < vertexCount[layer]; x++){
-		printf("lel %d %d\n", x, vertexCount[layer]);
+	int vertexCountOrig = vertexCount[layer];
+	for(int x = 0; x < vertexCountOrig; x++){
+//		printf("lel %d %d\n", x, vertexCount[layer]);
 		ind1 = x;//FIXME
 		for(int y = 0; y < nodeList[layer][x].sibCount; y++){
 			ind2 = nodeList[layer][x].sibs[y];
-			if(/*ive never seen this section error... findNodePointer(ind2, &(nodeList[layer][ind1])) == -1 ||*/ findNodePointer(ind1, &(nodeList[layer][ind2])) == -1){
+			if(findNodePointer(ind2, &(nodeList[layer][ind1])) == -1 || findNodePointer(ind1, &(nodeList[layer][ind2])) == -1){
 				puts("this is freel");
 			};
 			insertNodesAtIntersections(ind1, ind2, layer);
@@ -51,9 +55,10 @@ void cropNodesLayer(int layer){
 	}
 	node *other, *this;
 	for(int x = 0; x < vertexCount[layer]; x++){
-		for(int y = 0; y < nodeList[layer][x].sibCount; y++){
+		for(int y = 0; y < /*nodeList[layer][x].sibCount*/3; y++){
 			this = &(nodeList[layer][x]);
-			other = &(nodeList[layer][nodeList[layer][x].sibs[y]]);
+			if(this->sibs[y] == -1) break;//FIXME
+			other = &(nodeList[layer][this->sibs[y]]);
 			if(isOutside(this, other)){
 				int index = findNodePointer(x, other);
 				if(index == -1) puts("fatal error");
@@ -69,35 +74,49 @@ void cropNodesLayer(int layer){
 	}
 }
 void insertNodesAtIntersections(int ind1, int ind2, int layer){
-	point2d inter;
+//	puts("begun insert func");
 	node *new;
+	point2d* inter;
 	int index;
-	for(int count = 0; count+1<bPcount; count+=2){	
-		if(lineSegIntersect2d(nodeList[layer][ind1].loc, nodeList[layer][ind2].loc, bP[count], bP[count+1], &inter)){
-			vertexCount[layer]++;
-			nodeList[layer] = realloc(nodeList[layer], vertexCount[layer]*sizeof(node));//note that node *A and *B are defined after the realloc. I had a bug for a while due to defining before the realloc.
-			node* A = &(nodeList[layer][ind1]);
-			node* B = &(nodeList[layer][ind2]);
-			new = &(nodeList[layer][vertexCount[layer]-1]);
-			new->loc[0] = inter[0];
-			new->loc[1] = inter[1];
-			new->sibCount = 2;
-			new->sibs[0] = ind1;
-			new->sibs[1] = ind2;
-			new->sibs[2] = -1;
-			index = findNodePointer(ind2, A);
-			if(index == -1) puts("warning 1!");//warning 1 never occurs
-			A->sibs[index] = vertexCount[layer]-1;
-			index = findNodePointer(ind1, B);
-			if(index == -1){
-				puts("warning 2!");
-			}else{
-			//	puts("all good!");
-			}
-			B->sibs[index] = vertexCount[layer]-1;
-			break;
+	node *A, *B;
+	int howmany;
+	inter = intersectsBound(nodeList[layer][ind1].loc, nodeList[layer][ind2].loc, &howmany);
+//	puts("first step done!");
+	nodeList[layer] = realloc(nodeList[layer], (vertexCount[layer]+howmany)*sizeof(node));//note that node *A and *B are defined after the realloc. I had a bug for a while due to defining before the realloc.
+	for(int which = 0; which < howmany; which++){
+		vertexCount[layer]++;
+		A = &(nodeList[layer][ind1]);
+		B = &(nodeList[layer][ind2]);
+		new = &(nodeList[layer][vertexCount[layer]-1]);
+		new->loc[0] = inter[which][0];
+		new->loc[1] = inter[which][1];
+		new->sibCount = 2;
+		new->sibs[0] = ind1;
+		new->sibs[1] = ind2;
+		new->sibs[2] = -1;
+		index = findNodePointer(ind2, A);
+		if(index == -1) puts("warning 1!");//warning 1 never occurs
+		A->sibs[index] = vertexCount[layer]-1;
+		index = findNodePointer(ind1, B);
+		if(index == -1)	puts("warning 2!");
+		B->sibs[index] = vertexCount[layer]-1;
+		ind2 = vertexCount[layer]-1;
+	}
+	free(inter);
+//	puts("ended insert func");
+}
+point2d* intersectsBound(point2d A, point2d B, int* howmany){
+	point2d* ret = malloc(sizeof(point2d));
+	*howmany = 0;
+	for(int count = 0; count+1<bPcount; count+=2){
+		//puts("realloced once");
+		if(lineSegIntersect2d(A, B, bP[count], bP[count+1], &(ret[(*howmany)]))){
+			(*howmany)++;
+			ret = realloc(ret, ((*howmany)+1)*sizeof(point2d));
 		}
 	}
+	sortPointList(B, ret, *howmany);
+	return ret;
 }
 int isOutside(node *A, node *B){
 	point2d mid;
@@ -108,7 +127,29 @@ int isOutside(node *A, node *B){
 			outside ^= 1;
 		}
 	}
+	//FIXME
+	if(!outside){
+		drawPoint(mid[0]*750/maxx, mid[1]*750/maxy, 2);
+	}else{
+		drawPoint(mid[0]*750/maxx, mid[1]*750/maxy, 0);
+	}
 	return outside;
+}
+void sortPointList(point2d start, point2d* inter, int size){//sorts list of points in order of distance away from current first point.
+	//insertion
+//	puts("begun sortPointList");
+	for(int temp = 1; temp < size; temp++){
+		for(int loc = temp; loc > 1; loc--){
+			if(distance2d(start, inter[loc]) < distance2d(start, inter[loc-1])){
+				scalar x = inter[loc][0];
+				scalar y = inter[loc][1];
+				inter[loc][0] = inter[loc-1][0];
+				inter[loc][1] = inter[loc-1][1];
+				inter[loc-1][0] = x;
+				inter[loc-1][1] = y;
+			}else break;
+		}
+	}
 }
 int lineSegIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, point2d* sect/*for inter'sect*/){
 	point2d reta, retb;

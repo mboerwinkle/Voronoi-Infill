@@ -7,7 +7,7 @@ void display(){
 	int div;
 	puts("print layers divisible by what number?");
 	scanf("%d", &div);
-	openSDLwindow();
+//	openSDLwindow();
 	for(int layer = 0; layer < maxz; layer+=div){
 		getchar();
 //		layer_to_ascii(layer);

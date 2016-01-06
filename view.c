@@ -31,6 +31,7 @@ void openSDLwindow(){
 	render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	clearScreen();
 	paint();
+	SDL_SetRenderDrawColor(render, 255,5,5,255);
 }
 
 void closeSDLwindow(){
@@ -39,11 +40,10 @@ void closeSDLwindow(){
 	SDL_Quit();
 }
 void layer_to_SDL(int layer){
-	clearScreen();
 	for(int pnt = 0; pnt < points; pnt++){
 		drawPoint(pointList[pnt][0]*WIDTH/maxx, pointList[pnt][1]*HEIGHT/maxy, 1);
 	}
-	SDL_SetRenderDrawColor(render, 255,255,255,255);
+/*	SDL_SetRenderDrawColor(render, 255,255,255,255);
 	vertex *A, *B;
 	for(int temp = 0; temp < vertexCount[layer]; temp++){
 		A = &vertexList[layer][temp];
@@ -53,7 +53,7 @@ void layer_to_SDL(int layer){
 				drawLine(A->loc[0]*WIDTH/maxx, A->loc[1]*HEIGHT/maxy, B->loc[0]*WIDTH/maxx, B->loc[1]*HEIGHT/maxy);
 			}
 		}
-	}
+	}*/
 	SDL_SetRenderDrawColor(render, 255,5,5,255);
 	node *An, *Bn;
 	for(int temp = 0; temp < vertexCount[layer]; temp++){
@@ -62,10 +62,13 @@ void layer_to_SDL(int layer){
 			Bn = &nodeList[layer][test];
 			if((An->sibs[0] == test) ^ (An->sibs[1] == test) ^ (An->sibs[2] == test)){
 				drawLine(An->loc[0]*WIDTH/maxx, An->loc[1]*HEIGHT/maxy, Bn->loc[0]*WIDTH/maxx, Bn->loc[1]*HEIGHT/maxy);
+				paint();
+				getchar();
 			}
 		}
 	}
 	paint();
+	clearScreen();
 }
 void drawLine(int x1, int y1, int x2, int y2){
 //	SDL_SetRenderDrawColor(render, 200, 0, 255, 255);

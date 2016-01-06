@@ -26,6 +26,7 @@ int main(int argc, char *argv[]){
 	genPoints();
 	calcCenter();	
 	genNodes();
+	openSDLwindow();//FIXME
 	cropNodes();
 	display();
 	return 0;
