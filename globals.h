@@ -71,3 +71,5 @@ extern void closeSDLwindow();
 extern int getSharedParentCount(vertex a, vertex b);
 //crops all nodes to the inside of the boundary points
 extern void cropNodes();
+//returns the sibs index of the sib equal to targ, or -1
+int findNodePointer(int targ, node *orig);

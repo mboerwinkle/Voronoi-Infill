@@ -60,7 +60,7 @@ void layer_to_SDL(int layer){
 		An = &nodeList[layer][temp];
 		for(int test = temp+1; test < vertexCount[layer]; test++){
 			Bn = &nodeList[layer][test];
-			if((An->sibs[0] == test) ^ (An->sibs[1] == test) ^ (An->sibs[2] == test)){
+			if(findNodePointer(test, An)!=-1&&findNodePointer(temp, Bn)!=-1){
 				drawLine(An->loc[0]*WIDTH/maxx, An->loc[1]*HEIGHT/maxy, Bn->loc[0]*WIDTH/maxx, Bn->loc[1]*HEIGHT/maxy);
 			}
 		}

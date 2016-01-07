@@ -49,7 +49,7 @@ void cropNodesLayer(int layer){
 			if(findNodePointer(ind2, &(nodeList[layer][ind1])) == -1 || findNodePointer(ind1, &(nodeList[layer][ind2])) == -1){
 				puts("this is freel");
 			};
-//			insertNodesAtIntersections(ind1, ind2, layer);
+			insertNodesAtIntersections(ind1, ind2, layer);
 		}
 	}
 	node *other, *this;
@@ -163,9 +163,9 @@ int lineSegIntersect2dNoRet(point2d a1, point2d a2, point2d b1, point2d b2){
 	return 1;
 }
 int findNodePointer(int targ, node *orig){
-	if(orig->sibs[0] == targ) return 0;
-	if(orig->sibs[1] == targ) return 1;
-	if(orig->sibs[2] == targ) return 2;
+	for(int x = 0; x < orig->sibCount; x++){
+		if(orig->sibs[x] == targ) return x;
+	}
 	return -1;
 }
 void midpoint2d(point2d A, point2d B, point2d* ret){
