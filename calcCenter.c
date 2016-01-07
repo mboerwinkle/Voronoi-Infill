@@ -78,5 +78,5 @@ int sequencer(int count, int max){
 	}else{
 	}
 */
-return count;
+	return count;
 }

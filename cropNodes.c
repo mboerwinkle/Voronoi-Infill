@@ -14,7 +14,6 @@ extern int lineSegIntersect2dNoRet(point2d a1, point2d a2, point2d b1, point2d b
 extern int lineSegIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, point2d* sect/*for inter'sect*/);
 extern point2d* intersectsBound(point2d A, point2d B, int* howmany);
 extern void sortPointList(point2d start, point2d* inter, int size);
-extern void drawPoint(int x, int y, int color);//FIXME
 void cropNodes(){
 	insideBounds[0] = 3000;
 	insideBounds[1] = 3000;
@@ -50,14 +49,13 @@ void cropNodesLayer(int layer){
 			if(findNodePointer(ind2, &(nodeList[layer][ind1])) == -1 || findNodePointer(ind1, &(nodeList[layer][ind2])) == -1){
 				puts("this is freel");
 			};
-			insertNodesAtIntersections(ind1, ind2, layer);
+//			insertNodesAtIntersections(ind1, ind2, layer);
 		}
 	}
 	node *other, *this;
 	for(int x = 0; x < vertexCount[layer]; x++){
-		for(int y = 0; y < /*nodeList[layer][x].sibCount*/3; y++){
+		for(int y = 0; y < nodeList[layer][x].sibCount; y++){
 			this = &(nodeList[layer][x]);
-			if(this->sibs[y] == -1) break;//FIXME
 			other = &(nodeList[layer][this->sibs[y]]);
 			if(isOutside(this, other)){
 				int index = findNodePointer(x, other);
@@ -126,12 +124,6 @@ int isOutside(node *A, node *B){
 		if(lineSegIntersect2dNoRet(insideBounds, mid, bP[count], bP[count+1])){
 			outside ^= 1;
 		}
-	}
-	//FIXME
-	if(!outside){
-		drawPoint(mid[0]*750/maxx, mid[1]*750/maxy, 2);
-	}else{
-		drawPoint(mid[0]*750/maxx, mid[1]*750/maxy, 0);
 	}
 	return outside;
 }

@@ -62,8 +62,6 @@ void layer_to_SDL(int layer){
 			Bn = &nodeList[layer][test];
 			if((An->sibs[0] == test) ^ (An->sibs[1] == test) ^ (An->sibs[2] == test)){
 				drawLine(An->loc[0]*WIDTH/maxx, An->loc[1]*HEIGHT/maxy, Bn->loc[0]*WIDTH/maxx, Bn->loc[1]*HEIGHT/maxy);
-				paint();
-				getchar();
 			}
 		}
 	}

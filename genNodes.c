@@ -3,7 +3,7 @@
 #include "globals.h"
 node **nodeList;
 void genNodes(){
-	node* thisnode, *testnode;
+	node *thisnode, *testnode;
 	vertex* thisvertex;
 	nodeList = calloc(maxz, sizeof(node*));
 	int temp, test;
