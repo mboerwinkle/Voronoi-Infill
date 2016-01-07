@@ -1,3 +1,4 @@
+//THANKS: line "y--;" used to say "y = 0;", caused problems when y was already equal to 0. bug detected by Simon Boerwinkle
 #include <stdio.h>
 #include <stdlib.h>
 #include "globals.h"
@@ -79,7 +80,7 @@ void cropNodesLayer(int layer){
 				this->sibs[y] = this->sibs[(this->sibCount)-1];
 				this->sibs[(this->sibCount)-1] = -1;
 				this->sibCount--;
-				y = 0;//this is because while rearranging the pointers, some would be skipped maybe FIXME
+				y--;//this is because while rearranging the pointers, some would be skipped maybe
 			}
 		}
 	}
