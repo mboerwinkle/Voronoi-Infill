@@ -145,7 +145,7 @@ void sortPointList(point2d start, point2d* inter, int size){//sorts list of poin
 	//insertion
 //	puts("begun sortPointList");
 	for(int temp = 1; temp < size; temp++){
-		for(int loc = temp; loc > 1; loc--){
+		for(int loc = temp; loc > 0; loc--){
 			if(distance2d(start, inter[loc]) < distance2d(start, inter[loc-1])){
 				scalar x = inter[loc][0];
 				scalar y = inter[loc][1];
