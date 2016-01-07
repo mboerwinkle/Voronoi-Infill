@@ -3,7 +3,7 @@
 #include "globals.h"
 
 point2d *bP;
-long int bPcount = 8;
+long int bPcount = 14;
 point2d insideBounds;
 extern void cropNodesLayer(int layer);
 extern void insertNodesAtIntersections(int ind1, int ind2, int layer);
@@ -20,13 +20,13 @@ void cropNodes(){
 	bP = calloc(bPcount, sizeof(point2d));
 	bP[0][0] = 2000;
 	bP[0][1] = 2000;
-	bP[1][0] = 12000;
+	bP[1][0] = 6000;
 	bP[1][1] = 2000;
-	bP[2][0] = 12000;
+	bP[2][0] = 6000;
 	bP[2][1] = 2000;
-	bP[3][0] = 12000;
+	bP[3][0] = 6000;
 	bP[3][1] = 12000;
-	bP[4][0] = 12000;
+	bP[4][0] = 6000;
 	bP[4][1] = 12000;
 	bP[5][0] = 2000;
 	bP[5][1] = 12000;
@@ -34,6 +34,19 @@ void cropNodes(){
 	bP[6][1] = 12000;
 	bP[7][0] = 2000;
 	bP[7][1] = 2000;
+
+	bP[8][0] = 8000;
+	bP[8][1] = 2000;
+	bP[9][0] = 8000;
+	bP[9][1] = 12000;
+	bP[10][0] = 8000;
+	bP[10][1] = 12000;
+	bP[11][0] = 12000;
+	bP[11][1] = 7000;
+	bP[12][0] = 12000;
+	bP[12][1] = 7000;
+	bP[13][0] = 8000;
+	bP[13][1] = 2000;
 	for(int count = 0; count < maxz; count+=step){
 		cropNodesLayer(count);
 	}
