@@ -13,6 +13,7 @@ void display(){
 //		layer_to_ascii(layer);
 		layer_to_SDL(layer);
 	}
+	getchar();
 	closeSDLwindow();
 }
 void layer_to_ascii(int layer){

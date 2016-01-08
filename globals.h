@@ -79,3 +79,5 @@ extern void cropNodes();
 extern int findNodePointer(int targ, node *orig);
 //generates the path of the head to take
 extern void genPath();
+//generates the path of the head to take for a single layer
+extern void genPathLayer(int layer);
