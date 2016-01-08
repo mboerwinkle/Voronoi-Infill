@@ -58,11 +58,9 @@ void cropNodesLayer(int layer){
 	for(int x = 0; x < vertexCountOrig; x++){
 //		printf("lel %d %d\n", x, vertexCount[layer]);
 		ind1 = x;//FIXME
-		for(int y = 0; y < nodeList[layer][x].sibCount; y++){
-			ind2 = nodeList[layer][x].sibs[y];
-			if(findNodePointer(ind2, &(nodeList[layer][ind1])) == -1 || findNodePointer(ind1, &(nodeList[layer][ind2])) == -1){
-				puts("this is freel");
-			};
+		for(int y = x+1; y < vertexCountOrig; y++){
+			ind2 = y;
+			if(findNodePointer(ind2, &(nodeList[layer][ind1])) == -1 || findNodePointer(ind1, &(nodeList[layer][ind2])) == -1) continue;
 			insertNodesAtIntersections(ind1, ind2, layer);
 		}
 	}
