@@ -30,6 +30,10 @@ extern int *vertexCount;
 extern node **nodeList;
 //array of bitarrays of which points are present on each layer
 extern bitarray *pointsPresent;
+//list of 3d points of positions for the print head to travel to
+extern point3d *path;
+//same length as path, specifies if plastic should be extruded or not
+extern bitarray extrude;
 
 //allocates memory ot pointList, and generates safe point locations
 extern void genPoints();
@@ -72,4 +76,6 @@ extern int getSharedParentCount(vertex a, vertex b);
 //crops all nodes to the inside of the boundary points
 extern void cropNodes();
 //returns the sibs index of the sib equal to targ, or -1
-int findNodePointer(int targ, node *orig);
+extern int findNodePointer(int targ, node *orig);
+//generates the path of the head to take
+extern void genPath();

@@ -27,6 +27,7 @@ int main(int argc, char *argv[]){
 	calcCenter();	
 	genNodes();
 	cropNodes();
+	genPath();
 	display();
 	return 0;
 }
