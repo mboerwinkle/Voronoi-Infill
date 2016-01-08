@@ -19,7 +19,7 @@ void genPathLayer(int layer){
 	int index;
 	for(count = 0; count < vertexCount[layer]; count++){
 		while(nodeLayer[count].sibCount > 0){
-			printf("%ld, %ld, %d, 0\n", nodeLayer[count].loc[0], nodeLayer[count].loc[1], layer);
+			printf("%lf, %lf, %lf, 0\n", ((double)nodeLayer[count].loc[0])/100, ((double)nodeLayer[count].loc[1])/100, ((double)layer)/100);
 			head = count;
 			while(nodeLayer[head].sibCount > 0){
 				oldHead = head;
@@ -31,7 +31,7 @@ void genPathLayer(int layer){
 				nodeLayer[head].sibs[nodeLayer[head].sibCount-1] = -1;
 				nodeLayer[head].sibCount--;
 				if(oldHead == head) puts("well, it is referencing itself!");
-				printf("%ld, %ld, %d, 1\n", nodeLayer[head].loc[0], nodeLayer[head].loc[1], layer);
+				printf("%lf, %lf, %lf, 1\n", ((double)nodeLayer[head].loc[0])/100, ((double)nodeLayer[head].loc[1])/100, ((double)layer)/100);
 				drawLine(nodeLayer[head].loc[0]*WIDTH/maxx, nodeLayer[head].loc[1]*HEIGHT/maxy, nodeLayer[oldHead].loc[0]*WIDTH/maxx, nodeLayer[oldHead].loc[1]*HEIGHT/maxy);
 			}
 		}
