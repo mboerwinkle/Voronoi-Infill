@@ -21,8 +21,18 @@ int main(int argc, char *argv[]){
 	points = atoi(argv[4]);
 	step = atoi(argv[5]);
 	printf(" maxx:%d\n maxy:%d\n maxz:%d\n points:%d\n", maxx, maxy, maxz, points);
-	srandom(time(NULL));
-	
+	puts("use epoch seed? y/n");
+	char resp;
+	int seed;
+	scanf("%c", &resp);
+	if(resp == 'n'){
+		puts("specify seed");
+		scanf("%d", &seed);
+	}else{
+		seed = time(NULL);
+	}
+	srandom(seed);
+	printf("seed: %d\n", seed);	
 	genPoints();
 	calcCenter();	
 	genNodes();

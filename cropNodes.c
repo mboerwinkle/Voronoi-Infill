@@ -4,7 +4,7 @@
 #include "globals.h"
 
 point2d *bP;
-long int bPcount = 8;
+long int bPcount = 16;
 point2d insideBounds;
 extern void cropNodesLayer(int layer);
 extern void insertNodesAtIntersections(int ind1, int ind2, int layer);
@@ -17,24 +17,48 @@ extern point2d* intersectsBound(point2d A, point2d B, int* howmany);
 extern void sortPointList(point2d start, point2d* inter, int size);
 void cropNodes(){
 	insideBounds[0] = 6000;
-	insideBounds[1] = 6000;
+	insideBounds[1] = 7100;
 	bP = calloc(bPcount, sizeof(point2d));
-	bP[0][0] = 2000;
-	bP[0][1] = 2000;
-	bP[1][0] = 12000;
-	bP[1][1] = 2000;
-	bP[2][0] = 12000;
-	bP[2][1] = 2000;
-	bP[3][0] = 12000;
-	bP[3][1] = 12000;
-	bP[4][0] = 12000;
-	bP[4][1] = 12000;
-	bP[5][0] = 2000;
-	bP[5][1] = 12000;
-	bP[6][0] = 2000;
-	bP[6][1] = 12000;
+	bP[0][0] = 12000;
+	bP[0][1] = 7000;
+
+	bP[1][0] = 10536;
+	bP[1][1] = 3464;
+	bP[2][0] = 10536;
+	bP[2][1] = 3464;
+
+	bP[3][0] = 7000;
+	bP[3][1] = 2000;
+	bP[4][0] = 7000;
+	bP[4][1] = 2000;
+
+	bP[5][0] = 3464;
+	bP[5][1] = 3464;
+	bP[6][0] = 3464;
+	bP[6][1] = 3464;
+
 	bP[7][0] = 2000;
-	bP[7][1] = 2000;
+	bP[7][1] = 7000;
+	bP[8][0] = 2000;
+	bP[8][1] = 7000;
+
+	bP[9][0] = 3464;
+	bP[9][1] = 10536;
+	bP[10][0] = 3464;
+	bP[10][1] = 10536;
+
+	bP[11][0] = 7000;
+	bP[11][1] = 12000;
+	bP[12][0] = 7000;
+	bP[12][1] = 12000;
+
+	bP[13][0] = 10536;
+	bP[13][1] = 10536;
+	bP[14][0] = 10536;
+	bP[14][1] = 10536;
+
+	bP[15][0] = 12000;
+	bP[15][1] = 7000;
 /*triangle
 	bP[8][0] = 8000;
 	bP[8][1] = 2000;
