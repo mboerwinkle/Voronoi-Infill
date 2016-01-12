@@ -6,7 +6,9 @@
 #define EXTRUSION_CONSTANT 0.1//approx
 extern void drawLine(int x1, int y1, int x2, int y2);//this should not be here
 extern void genPathLayer(int layer);
+//FILE *gcode;
 void genPath(){
+//	gcode = fopen("output.txt", "w");
 	for(int layer = 0; layer < maxz; layer+=step){
 		genPathLayer(layer);
 	}

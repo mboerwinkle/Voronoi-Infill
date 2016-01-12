@@ -159,7 +159,7 @@ int isOutside(node *A, node *B){
 	midpoint2d(A->loc, B->loc, &mid);
 	for(int count = 0; count+1 < bPcount; count+=2){
 		if(lineSegIntersect2dNoRet(insideBounds, mid, bP[count], bP[count+1])){
-			outside ^= 1;
+			outside |= 1;//FIXME changed to or instead of xor (^) to temporarily work around the problem of intersecting twice when the line segment crosses a vertex of the border
 		}
 	}
 	return outside;
