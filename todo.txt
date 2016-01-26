@@ -1,3 +1,7 @@
+push back less
+retrace over path
+have stretch multiplier
+better point placement
 break crop Nodes into separate files
 fix dat thing where the display doesnt display every line
 make ORBitarray test suite

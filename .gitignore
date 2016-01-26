@@ -34,3 +34,5 @@ run
 
 # vim temporary files
 .*.swp
+# gcode output
+*.gcode
