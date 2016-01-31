@@ -31,9 +31,9 @@ extern node **nodeList;
 //array of bitarrays of which points are present on each layer
 extern bitarray *pointsPresent;
 //list of 3d points of positions for the print head to travel to
-extern point3d *path;
+//extern point3d *path;
 //same length as path, specifies if plastic should be extruded or not
-extern bitarray extrude;
+//extern bitarray extrude;
 
 //allocates memory ot pointList, and generates safe point locations
 extern void genPoints();
@@ -59,6 +59,8 @@ extern int lineIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, scala
 extern void planeIntersect(int layer, point3d one, point3d two, point2d ret);
 //2d distance
 extern scalar distance2d(point2d a, point2d b);
+//2d distance squared (to avoid the nasty squareroot)
+extern scalar distance2dsq(point2d a, point2d b);
 //3d distance squared (to avoid the nasty squareroot)
 extern scalar distance3dsq(point3d a, point3d b);
 //displays the voronoi diagram. This description intentionally left ambiguous

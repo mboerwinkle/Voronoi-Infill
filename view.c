@@ -59,7 +59,7 @@ void layer_to_SDL(int layer){
 		}
 	}*/
 	SDL_SetRenderDrawColor(render, 255,0,255,255);
-	genPathLayer(layer);
+//	genPathLayer(layer);
 	SDL_SetRenderDrawColor(render, 0,0,255,255);
 	node *An, *Bn;
 	for(int temp = 0; temp < vertexCount[layer]; temp++){

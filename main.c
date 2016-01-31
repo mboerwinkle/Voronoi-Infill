@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
 	calcCenter();	
 	genNodes();
 	cropNodes();
-//now called in view.c	genPath();
-	display();
+	genPath();
+//	display();
 	return 0;
 }
