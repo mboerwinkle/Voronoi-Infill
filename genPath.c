@@ -7,7 +7,6 @@
 extern void drawLine(int x1, int y1, int x2, int y2);//this should not be here
 extern int getNextClosest(int layer, point2d currPos, int *closest);//returns 1 if connections still need to be made, puts index of closest node to currPos into closest
 long int E = 0;
-//FILE *gcode;
 
 typedef struct pathLoc{
 	struct pathLoc *prev;
@@ -48,6 +47,7 @@ void freeLocStack(){
 void genPath(){
 	point2d head = {0, 0};
 	node* nodeLayer;
+	FILE *wfp = fopen("output.gcode", "w");//write file pointer
 	int index, oldIndex, connectionIndex;
 	for(int layer = 0; layer < maxz; layer+=step){
 		nodeLayer = nodeList[layer];
@@ -56,9 +56,7 @@ void genPath(){
 			//print out gcode to move to new location without extruding
 
 
-			printf("G01 F6000\n");
-			printf("G01 X%.2lf Y%.2lf Z%.2lf\n", ((double)nodeLayer[index].loc[0]-2000)/100, ((double)nodeLayer[index].loc[1]-2000)/100, (((double)layer)/100));
-			printf("G01 F1800\n");
+			fprintf(wfp, "G01 F6000\nG01 X%.2lf Y%.2lf Z%.2lf\nG01 F1800\n", ((double)nodeLayer[index].loc[0]-2000)/100, ((double)nodeLayer[index].loc[1]-2000)/100, (((double)layer)/100));
 
 			addToLocStack(index);
 			while(1){
@@ -71,11 +69,7 @@ void genPath(){
 					}else{
 						index = regressLocStack();
 						//print out gcode to move to new location without extruding
-
-						printf("G01 F6000\n");
-						printf("G01 X%.2lf Y%.2lf Z%.2lf\n", ((double)nodeLayer[index].loc[0]-2000)/100, ((double)nodeLayer[index].loc[1]-2000)/100, (((double)layer)/100));
-						printf("G01 F1800\n");
-
+						fprintf(wfp, "G01 F6000\nG01 X%.2lf Y%.2lf Z%.2lf\nG01 F1800\n", ((double)nodeLayer[index].loc[0]-2000)/100, ((double)nodeLayer[index].loc[1]-2000)/100, (((double)layer)/100));
 					}
 				}else{
 					oldIndex = index;
@@ -96,11 +90,12 @@ void genPath(){
 					head[1] = nodeLayer[index].loc[1];
 
 					E += distance2d(head, nodeLayer[oldIndex].loc);
-					printf("G01 X%.2lf Y%.2lf Z%.2lf E%.3lf\n", ((double)head[0]-2000)/100, ((double)head[1]-2000)/100, (((double)layer)/100), ((double)E)/100*EXTRUSION_CONSTANT);
+					fprintf(wfp, "G01 X%.2lf Y%.2lf Z%.2lf E%.3lf\n", ((double)head[0]-2000)/100, ((double)head[1]-2000)/100, (((double)layer)/100), ((double)E)/100*EXTRUSION_CONSTANT);
 				}
 			}
 		}
 	}
+	fclose(wfp);
 }
 
 int getNextClosest(int layer, point2d currPos, int *closest){//I use a point2d instead of an index because I want this to work across layers

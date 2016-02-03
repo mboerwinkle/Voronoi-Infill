@@ -23,14 +23,15 @@ scalar radsq(point3d targ, int layer){//cite
 	int zdist = abs(layer-targ[2]);
 	return -(zdist-konstant)*(zdist+konstant);//overflow
 }
-void planeIntersect(int layer, point3d one, point3d two, point2d ret){
+int planeIntersect(int layer, point3d one, point3d two, point2d ret){
 	point2d newone = {one[0], one[1]};//thus we gain the 2d projections of our 3d points
 	point2d newtwo = {two[0], two[1]};
 	
 	scalar distABsq = distance2dsq(newone, newtwo);
+	if(distABsq == 0) return 1; //the points are on top of each other (error)
 	scalar unit1 = distABsq+radsq(one, layer)-radsq(two, layer);
 	scalar unit2 = 2*distABsq;
 	ret[0] = one[0]+((unit1*(two[0]-one[0]))/unit2);
 	ret[1] = one[1]+((unit1*(two[1]-one[1]))/unit2);
+	return 0;
 }
-

@@ -11,8 +11,7 @@ int setVertex(int layer, int ind1, int ind2, int ind3, vertex* target){
 	target->parents[1] = p2;
 	target->parents[2] = p3;
 	point2d a1, a2, b1, b2;
-	planeIntersect(layer, *p1, *p2, a1);
-	planeIntersect(layer, *p2, *p3, b1);
+	if(planeIntersect(layer, *p1, *p2, a1) || planeIntersect(layer, *p2, *p3, b1)) return 0;//two points are on top of each other;
 	
 	//vectors of bisector
 	scalar cvx = -((*p1)[1]-(*p2)[1]);
