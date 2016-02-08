@@ -1,13 +1,9 @@
-push back less
-retrace over path
-have stretch multiplier
-better point placement
+add in dynamic nodes.
 break crop Nodes into separate files
 fix dat thing where the display doesnt display every line
 make ORBitarray test suite
 make genBitarray/setBit/getBit macros?
 make binary search layer gen
-add in physics movement
 make calcCenter directly create nodes
 make sure functions are passed by reference
 make sure functions decrement to 0, not increment to a value(to check if neccessary)

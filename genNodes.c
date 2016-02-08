@@ -7,6 +7,7 @@ void genNodes(){
 	vertex* thisvertex;
 	nodeList = calloc(maxz, sizeof(node*));
 	int temp, test;
+	int tooFar = 0;
 	for(int layer = 0; layer < maxz; layer+=step){
 		nodeList[layer] = (node*)calloc(vertexCount[layer], sizeof(node));
 		for(temp = 0; temp < vertexCount[layer]; temp++){
@@ -18,7 +19,7 @@ void genNodes(){
 				if(getSharedParentCount(vertexList[layer][test], *thisvertex) == 2){
 					testnode = &(nodeList[layer][test]);
 					if(thisnode->sibCount == 3 || testnode->sibCount == 3){
-						puts("too far");
+						tooFar++;
 						continue;
 					}
 					thisnode->sibs[thisnode->sibCount] = test;
@@ -29,4 +30,5 @@ void genNodes(){
 			}
 		}
 	}
+	printf("Node overload: %d\n", tooFar);
 }
