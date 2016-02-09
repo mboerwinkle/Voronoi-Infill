@@ -9,6 +9,10 @@ typedef struct vertex{
 	point2d loc;
 	point3d *parents[3];
 }vertex;
+typedef struct line2d{
+	point2d end[2];
+	point3d *parents[2];
+}line2d;
 typedef struct node{
 	point2d loc;
 	int sibCount;
@@ -26,20 +30,24 @@ extern point3d *pointList;
 extern vertex **vertexList;
 //array of length of each array of vertexList
 extern int *vertexCount;
+//array of arrays of lines on each layer
+extern line2d **lineList;
+//array of length of each array of lineList
+extern int *lineCount;
 //array of arrays of nodes on each layer
 extern node **nodeList;
 //array of bitarrays of which points are present on each layer
 extern bitarray *pointsPresent;
-//list of 3d points of positions for the print head to travel to
-//extern point3d *path;
-//same length as path, specifies if plastic should be extruded or not
-//extern bitarray extrude;
 
 //allocates memory ot pointList, and generates safe point locations
 extern void genPoints();
 //calculates all the vertices (centers is the term I used to use)
 extern void calcCenter();
-//calculates nodes based on the vertices. (a pair of connected nodes shares two parents)
+//calculates all the lines between points(whether or not they are valid is addressed in cropLines
+extern void calcLines();
+//crops lines to generate valid power diagrams
+extern void cropLines();
+//calculates nodes based on the lines
 extern void genNodes();
 //generates a zeroed bitarray
 extern bitarray genBitarray(int size);
