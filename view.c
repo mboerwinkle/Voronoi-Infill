@@ -40,13 +40,17 @@ void closeSDLwindow(){
 	SDL_Quit();
 }
 void layer_to_SDL(int layer){
-	for(int pnt = 0; pnt < points; pnt++){
+/*	for(int pnt = 0; pnt < points; pnt++){
 		drawPoint(pointList[pnt][0]*WIDTH/maxx, pointList[pnt][1]*HEIGHT/maxy, 1);
+	}*/
+	SDL_SetRenderDrawColor(render, 255,255,255,255);
+	for(int count = 0; count < lineCount[layer]; count++){
+		drawLine(lineList[layer][count].end[0][0]*WIDTH/maxx, lineList[layer][count].end[0][1]*HEIGHT/maxy, lineList[layer][count].end[1][0]*WIDTH/maxx, lineList[layer][count].end[1][1]*HEIGHT/maxy);
 	}
-	for(int count = 0; count+1<bPcount; count+=2){
+/*	for(int count = 0; count+1<bPcount; count+=2){
 		SDL_SetRenderDrawColor(render, 255,255,255,255);
 		drawLine(bP[count][0]*WIDTH/maxx, bP[count][1]*HEIGHT/maxy, bP[count+1][0]*WIDTH/maxx, bP[count+1][1]*HEIGHT/maxy);
-	}
+	}*/
 /*	SDL_SetRenderDrawColor(render, 255,255,255,255);
 	vertex *A, *B;
 	for(int temp = 0; temp < vertexCount[layer]; temp++){
@@ -58,19 +62,6 @@ void layer_to_SDL(int layer){
 			}
 		}
 	}*/
-	SDL_SetRenderDrawColor(render, 255,0,255,255);
-//	genPathLayer(layer);
-	SDL_SetRenderDrawColor(render, 0,0,255,255);
-	node *An, *Bn;
-	for(int temp = 0; temp < vertexCount[layer]; temp++){
-		An = &nodeList[layer][temp];
-		for(int test = temp+1; test < vertexCount[layer]; test++){
-			Bn = &nodeList[layer][test];
-			if(findNodePointer(test, An)!=-1&&findNodePointer(temp, Bn)!=-1){
-				drawLine(An->loc[0]*WIDTH/maxx, An->loc[1]*HEIGHT/maxy, Bn->loc[0]*WIDTH/maxx, Bn->loc[1]*HEIGHT/maxy);
-			}
-		}
-	}
 	paint();
 	clearScreen();
 }
