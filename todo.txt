@@ -1,3 +1,4 @@
+make sortPointList operate based on x or y variation and not distance (for speed)
 add in dynamic nodes.
 break crop Nodes into separate files
 fix dat thing where the display doesnt display every line

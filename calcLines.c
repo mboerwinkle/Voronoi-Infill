@@ -38,6 +38,7 @@ void calcLines(){
 			}
 		}
 		lineList[layer] = realloc(lineList[layer], sizeof(line2d)*lineCount[layer]);
+		cropLines(layer);
 	}
 	printf("\n");//needed after the progress bar
 }

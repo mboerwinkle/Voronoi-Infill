@@ -45,8 +45,8 @@ extern void genPoints();
 extern void calcCenter();
 //calculates all the lines between points(whether or not they are valid is addressed in cropLines
 extern void calcLines();
-//crops lines to generate valid power diagrams
-extern void cropLines();
+//crops lines to generate valid power diagrams on a layer
+extern void cropLines(int layer);
 //calculates nodes based on the lines
 extern void genNodes();
 //generates a zeroed bitarray
@@ -92,4 +92,9 @@ extern int findNodePointer(int targ, node *orig);
 extern void genPath();
 //generates the path of the head to take for a single layer
 extern void genPathLayer(int layer);
+//finds the intersection of two linesegments
+extern int lineSegIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, point2d* sect/*for inter'sect*/);
 extern void midpoint2d(point2d A, point2d B, point2d* ret);
+//sorts point2d list inter (size "size") in order of increasing distance from "start"
+extern void sortPointList(point2d start, point2d* inter, int size);
+extern int lineSharesParent(line2d *A, line2d *B);
