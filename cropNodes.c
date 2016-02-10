@@ -9,7 +9,6 @@ point2d insideBounds;
 extern void cropNodesLayer(int layer);
 extern void insertNodesAtIntersections(int ind1, int ind2, int layer);
 extern int isOutside(node *A, node *B);
-extern void midpoint2d(point2d A, point2d B, point2d* ret);
 extern int findNodePointer(int targ, node *orig);
 extern int lineSegIntersect2dNoRet(point2d a1, point2d a2, point2d b1, point2d b2);
 extern int lineSegIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, point2d* sect/*for inter'sect*/);

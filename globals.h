@@ -11,7 +11,7 @@ typedef struct vertex{
 }vertex;
 typedef struct line2d{
 	point2d end[2];
-	point3d *parents[2];
+	int parents[2];
 }line2d;
 typedef struct node{
 	point2d loc;
@@ -92,3 +92,4 @@ extern int findNodePointer(int targ, node *orig);
 extern void genPath();
 //generates the path of the head to take for a single layer
 extern void genPathLayer(int layer);
+extern void midpoint2d(point2d A, point2d B, point2d* ret);
