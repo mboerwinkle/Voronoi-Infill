@@ -14,7 +14,7 @@ void calcLines(){
 	point2d mid;
 	scalar vx, vy;
 	for(int count = 0; count < maxz; count+=step){
-		progressBar(((count+step)*50)/(maxz), 50);
+		progressBar(count, maxz);
 		layer = count;
 		lineList[layer] = malloc(sizeof(line2d));
 		lineCount[layer] = 0;
@@ -27,7 +27,7 @@ void calcLines(){
 				}
 				lineList[layer][lineCount[layer]].parents[0] = i1;
 				lineList[layer][lineCount[layer]].parents[1] = i2;
-				vx = ((*p1)[1]-(*p2)[1]);
+				vx = -((*p1)[1]-(*p2)[1]);
 				vy = (*p1)[0]-(*p2)[0];
 				if(genLineInBounds(&(lineList[layer][lineCount[layer]]), mid, vx, vy)){
 					continue;
@@ -38,7 +38,7 @@ void calcLines(){
 			}
 		}
 		lineList[layer] = realloc(lineList[layer], sizeof(line2d)*lineCount[layer]);
-//		cropLines(layer);
+		cropLines(layer);
 	}
 	printf("\n");//needed after the progress bar
 }

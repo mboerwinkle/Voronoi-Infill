@@ -163,13 +163,32 @@ int isOutside(node *A, node *B){
 	return outside;
 }
 void sortPointList(point2d start, point2d* inter, int size){//sorts list of points in order of distance away from current first point.
-	//insertion
+	//insertion (old way)
 //	puts("begun sortPointList");
-	for(int temp = 1; temp < size; temp++){
+/*	for(int temp = 1; temp < size; temp++){
 		for(int loc = temp; loc > 0; loc--){
 			if(distance2d(start, inter[loc]) < distance2d(start, inter[loc-1])){
 				scalar x = inter[loc][0];
 				scalar y = inter[loc][1];
+				inter[loc][0] = inter[loc-1][0];
+				inter[loc][1] = inter[loc-1][1];
+				inter[loc-1][0] = x;
+				inter[loc-1][1] = y;
+			}else break;
+		}
+	}*/
+	//sorted by coordinate with the most difference (new way)
+	int loc, temp;
+	scalar x, y;
+	int w/*hich*/ = 0;//specifies which dimension to use for comparisons (x by default
+	if(abs(start[0]-inter[size-1][0]) < abs(start[1]-inter[size-1][1])){//y coord difference is more important, sort by that
+		w = 1;
+	}
+	for(temp = 1; temp < size; temp++){
+		for(loc = temp; loc > 0; loc--){
+			if(abs(start[w] - inter[loc][w]) < abs(start[w] - inter[loc-1][w])){
+				x = inter[loc][0];
+				y = inter[loc][1];
 				inter[loc][0] = inter[loc-1][0];
 				inter[loc][1] = inter[loc-1][1];
 				inter[loc-1][0] = x;

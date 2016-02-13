@@ -24,7 +24,7 @@ void clearScreen(){
 }
 void openSDLwindow(){
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS);
-	window = SDL_CreateWindow("Voronoi Infill", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
+	window = SDL_CreateWindow("Voronoi Infill", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH+50, HEIGHT+50, 0);
 	if(window == NULL){
 		SDL_Quit();
 	}
@@ -40,12 +40,21 @@ void closeSDLwindow(){
 	SDL_Quit();
 }
 void layer_to_SDL(int layer){
-/*	for(int pnt = 0; pnt < points; pnt++){
-		drawPoint(pointList[pnt][0]*WIDTH/maxx, pointList[pnt][1]*HEIGHT/maxy, 1);
-	}*/
+	for(int pnt = 0; pnt < points; pnt++){
+		drawPoint(pointList[pnt][0]*WIDTH/maxx+25, pointList[pnt][1]*HEIGHT/maxy+25, 1);
+	}
 	SDL_SetRenderDrawColor(render, 255,255,255,255);
 	for(int count = 0; count < lineCount[layer]; count++){
-		drawLine(lineList[layer][count].end[0][0]*WIDTH/maxx, lineList[layer][count].end[0][1]*HEIGHT/maxy, lineList[layer][count].end[1][0]*WIDTH/maxx, lineList[layer][count].end[1][1]*HEIGHT/maxy);
+		drawLine(lineList[layer][count].end[0][0]*WIDTH/maxx+25, lineList[layer][count].end[0][1]*HEIGHT/maxy+25, lineList[layer][count].end[1][0]*WIDTH/maxx+25, lineList[layer][count].end[1][1]*HEIGHT/maxy+25);
+	}
+	SDL_SetRenderDrawColor(render, 0,255,0,255);
+	point2d mid;
+	for(int count = 0; count < lineCount[layer]; count++){
+		midpoint2d(lineList[layer][count].end[0],lineList[layer][count].end[1], &mid);
+		drawLine(mid[0]*WIDTH/maxx+25, mid[1]*HEIGHT/maxy+25, pointList[lineList[layer][count].parents[0]][0]*WIDTH/maxx+25, pointList[lineList[layer][count].parents[0]][1]*HEIGHT/maxy+25);
+		
+		drawLine(mid[0]*WIDTH/maxx+25, mid[1]*HEIGHT/maxy+25, pointList[lineList[layer][count].parents[1]][0]*WIDTH/maxx+25, pointList[lineList[layer][count].parents[1]][1]*HEIGHT/maxy+25);
+		
 	}
 /*	for(int count = 0; count+1<bPcount; count+=2){
 		SDL_SetRenderDrawColor(render, 255,255,255,255);
