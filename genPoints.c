@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <string.h>
 #include "globals.h"
 //#define MINDIST 200000//completely arbitrary
@@ -76,5 +77,25 @@ void genPoints(){
 			}else yoffset = yoffsetStart;
 		}
 	}
+	pushPoints(maxx/2, maxy/2, 250);
 	printf("points: %d\n", points);
+}
+void pushPoints(scalar x, scalar y, double strength){
+	scalar vx, vy;
+	point2d center = {x, y};
+	point2d pnt;
+	double newDist;
+	double distMult;
+	double oldDist;
+	for(int temp = 0; temp < points; temp++){
+		pnt[0] = pointList[temp][0];
+		pnt[1] = pointList[temp][1];
+		oldDist = distance2d(pnt, center);
+		distMult = -1/((oldDist/strength)+1)+1;
+		newDist = distMult*oldDist;
+		vx = (newDist*(pnt[0]-x))/oldDist;
+		vy = (newDist*(pnt[1]-y))/oldDist;
+		pointList[temp][0] = x+vx;
+		pointList[temp][1] = y+vy;
+	}
 }

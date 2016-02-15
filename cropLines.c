@@ -87,7 +87,6 @@ void cropLines(int layer){
 	free(lineList[layer]);
 	lineList[layer] = newlayerlist;
 	lineCount[layer] = newCount;
-	printf("lines: %d\n", newCount);
 }
 
 int lineSharesParent(line2d *A, line2d *B){
