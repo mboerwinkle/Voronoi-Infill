@@ -3,10 +3,18 @@
 #include <math.h>
 #include "globals.h"
 scalar distance2d(point2d a, point2d b){
-	return sqrt((a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]));
+	//return sqrt((a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]));
+	scalar ret = (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]);
+
+	if(ret < abs(a[0]-b[0]) || ret < abs(a[1]-b[1])) puts("overflow in distance2d (planeintersect.c)");//overflow detected
+	return sqrt(ret);
 }
 scalar distance2dsq(point2d a, point2d b){
-	return (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]);
+//	return (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]);
+	scalar ret = (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]);
+
+	if(ret < abs(a[0]-b[0]) || ret < abs(a[1]-b[1])) puts("overflow in distance2d (planeintersect.c)");//overflow detected
+	return ret;
 }
 scalar distance3dsq(point3d a, point3d b){
 	//return (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1])+(a[2]-b[2])*(a[2]-b[2]);

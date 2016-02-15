@@ -165,7 +165,7 @@ int isOutside(node *A, node *B){
 void sortPointList(point2d start, point2d* inter, int size){//sorts list of points in order of distance away from current first point.
 	//insertion (old way)
 //	puts("begun sortPointList");
-/*	for(int temp = 1; temp < size; temp++){
+	for(int temp = 1; temp < size; temp++){
 		for(int loc = temp; loc > 0; loc--){
 			if(distance2d(start, inter[loc]) < distance2d(start, inter[loc-1])){
 				scalar x = inter[loc][0];
@@ -176,11 +176,12 @@ void sortPointList(point2d start, point2d* inter, int size){//sorts list of poin
 				inter[loc-1][1] = y;
 			}else break;
 		}
-	}*/
+	}
 	//sorted by coordinate with the most difference (new way)
-	int loc, temp;
+/*	int loc, temp;
 	scalar x, y;
-	int w/*hich*/ = 0;//specifies which dimension to use for comparisons (x by default
+	int w = 0;//specifies which dimension to use for comparisons (x by default
+	//if(abs(start[0]-inter[0][0]) < abs(start[1]-inter[0][1])){//y coord difference is more important, sort by that
 	if(abs(start[0]-inter[size-1][0]) < abs(start[1]-inter[size-1][1])){//y coord difference is more important, sort by that
 		w = 1;
 	}
@@ -195,7 +196,7 @@ void sortPointList(point2d start, point2d* inter, int size){//sorts list of poin
 				inter[loc-1][1] = y;
 			}else break;
 		}
-	}
+	}*/
 }
 int lineSegIntersect2d(point2d a1, point2d a2, point2d b1, point2d b2, point2d* sect/*for inter'sect*/){
 	point2d reta, retb;

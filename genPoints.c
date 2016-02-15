@@ -50,7 +50,7 @@ void genPoints(){//random point placement
 	}
 }
 */
-
+extern void pushPoints(scalar x, scalar y, double strength);
 #define UP 0.577//ratio of distpoints to height to go up each z step rn for 45 degree angle
 #define SIN 0.866//height of a triangle
 void genPoints(){
@@ -59,7 +59,9 @@ void genPoints(){
 	int yoffsetStart = 0, yoffset = 0;
 	pointList = (point3d*)calloc(1, sizeof(point3d));
 	for(z = 0; z < maxz; z+=UP*distpoints){
-		yoffsetStart = (int)(yoffsetStart+(distpoints*UP))%(int)(2*UP*distpoints);
+		if(yoffsetStart == 0){
+			yoffsetStart = (int)(distpoints*UP);
+		}else yoffsetStart = 0;
 		yoffset = yoffsetStart;
 		for(x = 0; x < maxx; x+=distpoints/2){
 			for(y = yoffset; y < maxy; y+=2*distpoints*SIN){
@@ -69,9 +71,10 @@ void genPoints(){
 				pointList[points-1][1] = y;
 				pointList[points-1][2] = z;
 			}
-			yoffset = (int)(yoffset+SIN*distpoints)%(int)(2*SIN*distpoints);
+			if(yoffset == yoffsetStart){
+			yoffset = yoffsetStart+(int)(SIN*distpoints);
+			}else yoffset = yoffsetStart;
 		}
 	}
 	printf("points: %d\n", points);
 }
-

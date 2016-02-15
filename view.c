@@ -40,21 +40,19 @@ void closeSDLwindow(){
 	SDL_Quit();
 }
 void layer_to_SDL(int layer){
+	printf("layer: %d\n", layer);
 	for(int pnt = 0; pnt < points; pnt++){
 		drawPoint(pointList[pnt][0]*WIDTH/maxx+25, pointList[pnt][1]*HEIGHT/maxy+25, 1);
 	}
-	SDL_SetRenderDrawColor(render, 255,255,255,255);
-	for(int count = 0; count < lineCount[layer]; count++){
-		drawLine(lineList[layer][count].end[0][0]*WIDTH/maxx+25, lineList[layer][count].end[0][1]*HEIGHT/maxy+25, lineList[layer][count].end[1][0]*WIDTH/maxx+25, lineList[layer][count].end[1][1]*HEIGHT/maxy+25);
-	}
-	SDL_SetRenderDrawColor(render, 0,255,0,255);
 	point2d mid;
 	for(int count = 0; count < lineCount[layer]; count++){
+		SDL_SetRenderDrawColor(render, 255,255,255,255);
+		drawLine(lineList[layer][count].end[0][0]*WIDTH/maxx+25, lineList[layer][count].end[0][1]*HEIGHT/maxy+25, lineList[layer][count].end[1][0]*WIDTH/maxx+25, lineList[layer][count].end[1][1]*HEIGHT/maxy+25);
+		SDL_SetRenderDrawColor(render, 0,255,0,255);
 		midpoint2d(lineList[layer][count].end[0],lineList[layer][count].end[1], &mid);
-		drawLine(mid[0]*WIDTH/maxx+25, mid[1]*HEIGHT/maxy+25, pointList[lineList[layer][count].parents[0]][0]*WIDTH/maxx+25, pointList[lineList[layer][count].parents[0]][1]*HEIGHT/maxy+25);
+	//	drawLine(mid[0]*WIDTH/maxx+25, mid[1]*HEIGHT/maxy+25, pointList[lineList[layer][count].parents[0]][0]*WIDTH/maxx+25, pointList[lineList[layer][count].parents[0]][1]*HEIGHT/maxy+25);
 		
-		drawLine(mid[0]*WIDTH/maxx+25, mid[1]*HEIGHT/maxy+25, pointList[lineList[layer][count].parents[1]][0]*WIDTH/maxx+25, pointList[lineList[layer][count].parents[1]][1]*HEIGHT/maxy+25);
-		
+	//	drawLine(mid[0]*WIDTH/maxx+25, mid[1]*HEIGHT/maxy+25, pointList[lineList[layer][count].parents[1]][0]*WIDTH/maxx+25, pointList[lineList[layer][count].parents[1]][1]*HEIGHT/maxy+25);
 	}
 /*	for(int count = 0; count+1<bPcount; count+=2){
 		SDL_SetRenderDrawColor(render, 255,255,255,255);
