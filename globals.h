@@ -16,7 +16,7 @@ typedef struct line2d{
 typedef struct node{
 	point2d loc;
 	int sibCount;
-	int sibs[3];
+	int* sibs;
 }node;
 //list of all boundary points (for cropping)
 extern point2d *bP;
@@ -36,6 +36,8 @@ extern line2d **lineList;
 extern int *lineCount;
 //array of arrays of nodes on each layer
 extern node **nodeList;
+//array of length of each array of nodeList
+extern int *nodeCount;
 //array of bitarrays of which points are present on each layer
 extern bitarray *pointsPresent;
 
@@ -98,3 +100,4 @@ extern void midpoint2d(point2d A, point2d B, point2d* ret);
 //sorts point2d list inter (size "size") in order of increasing distance from "start"
 extern void sortPointList(point2d start, point2d* inter, int size);
 extern int lineSharesParent(line2d *A, line2d *B);
+extern void combineNodes(int layer);

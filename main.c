@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
 //	printf("seed: %d\n", seed);	//not needed if deterministic!
 	genPoints();//initial point placement
 	calcLines();//generate lines between all possible points
-//	genNodes();//generate the nodes based on line endpoints
+	genNodes();//generate the nodes based on line endpoints
 //	cropNodes();//cut out nodes that are out of bounds
 //	genPath();//make gcode for the print
 	display();

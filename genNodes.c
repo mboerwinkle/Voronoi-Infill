@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include "globals.h"
 node **nodeList;
-void genNodes(){
+int *nodeCount;
+/*void genNodes(){
 	node *thisnode, *testnode;
 	vertex* thisvertex;
 	nodeList = calloc(maxz, sizeof(node*));
@@ -31,4 +32,26 @@ void genNodes(){
 		}
 	}
 	printf("Node overload: %d\n", tooFar);
+}*/
+void genNodes(){
+	int layer, temp;
+	nodeCount = calloc(maxz, sizeof(int));
+	nodeList = calloc(maxz, sizeof(node*));
+	for(layer = 0; layer < maxz; layer+=step){
+		nodeCount[layer] = 2*lineCount[layer];//we are going to start out with a unique node for each end, then we will combine close nodes.
+		nodeList[layer] = calloc(nodeCount[layer], sizeof(node));
+		for(temp = 0; temp < lineCount[layer]; temp++){
+			nodeList[layer][temp*2].sibCount = 1;
+			nodeList[layer][temp*2].sibs = malloc(sizeof(int));
+			nodeList[layer][temp*2].sibs[0] = temp*2+1;
+			nodeList[layer][temp*2].loc[0] = lineList[layer][temp].end[0][0];
+			nodeList[layer][temp*2].loc[1] = lineList[layer][temp].end[0][1];
+			nodeList[layer][temp*2+1].sibCount = 1;
+			nodeList[layer][temp*2+1].sibs = malloc(sizeof(int));
+			nodeList[layer][temp*2+1].sibs[0] = temp*2;
+			nodeList[layer][temp*2+1].loc[0] = lineList[layer][temp].end[1][0];
+			nodeList[layer][temp*2+1].loc[1] = lineList[layer][temp].end[1][1];
+		}
+		combineNodes(layer);
+	}
 }

@@ -1,3 +1,4 @@
+make lineCount and lineList not have unused indeces on uncalculated z coords
 make sortPointList operate based on x or y variation and not distance (for speed)
 add in dynamic nodes.
 break crop Nodes into separate files
