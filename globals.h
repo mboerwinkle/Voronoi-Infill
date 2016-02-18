@@ -85,7 +85,7 @@ extern void progressBar(int count, int max);
 extern void openSDLwindow();
 extern void closeSDLwindow();
 //returns number of shared parents of two vertices
-extern int getSharedParentCount(vertex a, vertex b);
+//extern int getSharedParentCount(vertex a, vertex b);
 //crops all nodes to the inside of the boundary points
 extern void cropNodes();
 //returns the sibs index of the sib equal to targ, or -1

@@ -38,7 +38,7 @@ int placementConflicts(int placedIndex, int testIndex){
 	if(x*x+y*y < MINDIST) return 1;
 	return 0;
 }*/
-
+/*
 #include <time.h>
 void genPoints(){//random point placement
 	srandom(time(NULL));
@@ -50,7 +50,7 @@ void genPoints(){//random point placement
 		pointList[count][2] = random()%maxz;
 	}
 }
-/*
+*/
 extern void pushPoints(scalar x, scalar y, double strength);
 #define UP 0.577//ratio of distpoints to height to go up each z step rn for 45 degree angle
 #define SIN 0.866//height of a triangle
@@ -78,8 +78,8 @@ void genPoints(){
 		}
 	}
 	//pushPoints(0, 0, 400);
-	//printf("points: %d\n", points);
-}*/
+	printf(" points: %d\n", points);
+}
 void pushPoints(scalar x, scalar y, double strength){
 	scalar vx, vy;
 	point2d center = {x, y};

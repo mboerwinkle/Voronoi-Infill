@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
 	calcLines();//generate lines between all possible points
 	genNodes();//generate the nodes based on line endpoints
 //	cropNodes();//cut out nodes that are out of bounds
-//	genPath();//make gcode for the print
+	genPath();//make gcode for the print
 	display();
 	return 0;
 }

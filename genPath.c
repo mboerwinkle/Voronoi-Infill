@@ -80,6 +80,10 @@ void genPath(){
 					nodeLayer[oldIndex].sibs[nodeLayer[oldIndex].sibCount-1] = -1;
 					nodeLayer[oldIndex].sibCount--;
 					connectionIndex = findNodePointer(oldIndex, &(nodeLayer[index]));
+					if(connectionIndex == -1){
+						printf("invalid connections. layer: %d\nTag <here> inserted in gcode\n", layer);
+						fprintf(wfp, "<here>\n");
+					}
 					nodeLayer[index].sibs[connectionIndex] = nodeLayer[index].sibs[nodeLayer[index].sibCount-1];
 					nodeLayer[index].sibs[nodeLayer[index].sibCount-1] = -1;
 					nodeLayer[index].sibCount--;
@@ -103,7 +107,7 @@ int getNextClosest(int layer, point2d currPos, int *closest){//I use a point2d i
 	scalar minDist = 0;
 	scalar newDist;
 	node *testNode;
-	for(int count = 0; count < vertexCount[layer]; count++){
+	for(int count = 0; count < nodeCount[layer]; count++){
 		testNode = &nodeList[layer][count];
 		if(testNode->sibCount < 1) continue;
 		newDist = distance2dsq(nodeList[layer][count].loc, currPos);
