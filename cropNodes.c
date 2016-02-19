@@ -164,7 +164,6 @@ int isOutside(node *A, node *B){
 }
 void sortPointList(point2d start, point2d* inter, int size){//sorts list of points in order of distance away from current first point.
 	//insertion (old way)
-//	puts("begun sortPointList");
 	for(int temp = 1; temp < size; temp++){
 		for(int loc = temp; loc > 0; loc--){
 			if(distance2d(start, inter[loc]) < distance2d(start, inter[loc-1])){

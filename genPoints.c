@@ -42,7 +42,7 @@ int placementConflicts(int placedIndex, int testIndex){
 #include <time.h>
 void genPoints(){//random point placement
 	srandom(time(NULL));
-	points = 7;
+	points = 80;
 	pointList = (point3d*)calloc(points, sizeof(point3d));
 	for(int count = 0; count < points; count++){
 		pointList[count][0] = random()%maxx;
@@ -59,13 +59,13 @@ void genPoints(){
 	scalar x, y, z;
 	int yoffsetStart = 0, yoffset = 0;
 	pointList = (point3d*)calloc(1, sizeof(point3d));
-	for(z = 0; z < maxz; z+=UP*distpoints){
+	for(z = 1; z < maxz; z+=UP*distpoints){
 		if(yoffsetStart == 0){
 			yoffsetStart = (int)(distpoints*UP);
 		}else yoffsetStart = 0;
 		yoffset = yoffsetStart;
-		for(x = 0; x < maxx; x+=distpoints/2){
-			for(y = yoffset; y < maxy; y+=2*distpoints*SIN){
+		for(x = 1; x < maxx; x+=distpoints/2){
+			for(y = yoffset+1; y < maxy; y+=2*distpoints*SIN){
 				points++;
 				pointList = (point3d*)realloc(pointList, points*sizeof(point3d));
 				pointList[points-1][0] = x;
@@ -77,7 +77,7 @@ void genPoints(){
 			}else yoffset = yoffsetStart;
 		}
 	}
-	//pushPoints(0, 0, 400);
+	pushPoints(0, 0, 400);
 	printf(" points: %d\n", points);
 }
 void pushPoints(scalar x, scalar y, double strength){

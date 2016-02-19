@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "globals.h"
+//determines if the two line segments can intersect in the square. designed in order to avoid problems with near-parallel lines overflowing scalars when their intersection point was calculated.
+int sideRay(point2d targ, line2d ray);
 
 void cropLines(int layer){
 	int i1, i2;
@@ -24,9 +26,13 @@ void cropLines(int layer){
 			if(i1 == i2) continue;
 //this is to check if it shares a parent. Ima go one step further and make it have parents[0].			if(!lineSharesParent(&(layerlist[i2]), &(layerlist[i1]))) continue;
 			if(!(layerlist[i1].parents[0] == layerlist[i2].parents[0] || layerlist[i1].parents[0] == layerlist[i2].parents[1])) continue;
-			if(lineSegIntersect2d(layerlist[i1].end[0], layerlist[i1].end[1], layerlist[i2].end[0], layerlist[i2].end[1], &(interList[interCount]))){
-				interCount++;
-				interList = realloc(interList, sizeof(point2d)*(interCount+1));
+			int res1 = sideRay(layerlist[i2].end[0], layerlist[i1]);
+			int res2 = sideRay(layerlist[i2].end[1], layerlist[i1]);
+			if(res1!=res2){
+				if(lineSegIntersect2d(layerlist[i1].end[0], layerlist[i1].end[1], layerlist[i2].end[0], layerlist[i2].end[1], &(interList[interCount]))){
+					interCount++;
+					interList = realloc(interList, sizeof(point2d)*(interCount+1));
+				}//else puts("Yo ni**a, come see this!");//if canIntersect in square, then it should be able to intersect....
 			}
 		}
 		sortPointList(interList[0], &(interList[1]), interCount-1);//-2 because I don't need to sort the ends, since they are the original ends
@@ -91,4 +97,13 @@ void cropLines(int layer){
 
 int lineSharesParent(line2d *A, line2d *B){
 	return (A->parents[0] == B->parents[0] || A->parents[0] == B->parents[1] || A->parents[1] == B->parents[0] || A->parents[1] == B->parents[1]);
+}
+
+//  public-domain code by Darel Rex Finley,
+//  2010.  See diagrams at http://
+//  alienryderflex.com/point_left_of_ray
+
+int sideRay(point2d targ, line2d ray){
+  if((targ[1]-ray.end[0][1])*(ray.end[1][0]-ray.end[0][0]) == (targ[0]-ray.end[0][0])*(ray.end[1][1]-ray.end[0][1])) return -1;
+  return (targ[1]-ray.end[0][1])*(ray.end[1][0]-ray.end[0][0]) < (targ[0]-ray.end[0][0])*(ray.end[1][1]-ray.end[0][1]);
 }

@@ -6,7 +6,10 @@ scalar distance2d(point2d a, point2d b){
 	//return sqrt((a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]));
 	scalar ret = (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1]);
 
-	if(ret < abs(a[0]-b[0]) || ret < abs(a[1]-b[1])) puts("overflow in distance2d (planeintersect.c)");//overflow detected
+	if(ret < abs(a[0]-b[0]) || ret < abs(a[1]-b[1])){
+		printf("overflow in distance2d %ld %ld, %ld %ld\n", a[0], a[1], b[0], b[1]);//overflow detected
+		
+	}
 	return sqrt(ret);
 }
 scalar distance2dsq(point2d a, point2d b){
@@ -21,7 +24,9 @@ scalar distance3dsq(point3d a, point3d b){
 //this is to check for overflow. odds are that if overflow is a problem then I would eventually get a distance that was shorter than the difference of one of their coordinates
 	scalar ret = (a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1])+(a[2]-b[2])*(a[2]-b[2]);
 
-	if(ret < abs(a[0]-b[0]) || ret < abs(a[1]-b[1]) || ret < abs(a[2]-b[2])) puts("overflow in distance3dsq (planeintersect.c)");//overflow detected
+	if(ret < abs(a[0]-b[0]) || ret < abs(a[1]-b[1]) || ret < abs(a[2]-b[2])){
+		printf("overflow in distance3dsq %ld %ld %ld, %ld %ld %ld\n", a[0], a[1], a[2], b[0], b[1], b[2]);//overflow detected
+	}
 	return ret;
 }
 scalar radsq(point3d targ, int layer){//cite
