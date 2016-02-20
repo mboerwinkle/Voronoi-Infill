@@ -90,6 +90,24 @@ void genPath(){
 					if(oldIndex == index) puts("well, it is referencing itself!");
 					addToLocStack(index);
 					//
+					//FIXME here, I am checking for any repeat references between these two nodes and destroying them. this should be avoided in combineNodes
+					while(1){
+						connectionIndex = findNodePointer(oldIndex, &(nodeLayer[index]));
+						if(connectionIndex == -1) break;
+						puts("avoided");
+						nodeLayer[index].sibs[connectionIndex] = nodeLayer[index].sibs[nodeLayer[index].sibCount-1];
+						nodeLayer[index].sibs[nodeLayer[index].sibCount-1] = -1;
+						nodeLayer[index].sibCount--;
+					}
+					while(1){
+						connectionIndex = findNodePointer(index, &(nodeLayer[oldIndex]));
+						if(connectionIndex == -1) break;
+						puts("avoided");
+						nodeLayer[oldIndex].sibs[connectionIndex] = nodeLayer[oldIndex].sibs[nodeLayer[oldIndex].sibCount-1];
+						nodeLayer[oldIndex].sibs[nodeLayer[oldIndex].sibCount-1] = -1;
+						nodeLayer[oldIndex].sibCount--;
+					}
+					//
 					head[0] = nodeLayer[index].loc[0];
 					head[1] = nodeLayer[index].loc[1];
 

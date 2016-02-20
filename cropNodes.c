@@ -77,7 +77,7 @@ void cropNodes(){
 }
 void cropNodesLayer(int layer){
 	int ind1, ind2;
-	int vertexCountOrig = vertexCount[layer];
+	int vertexCountOrig = nodeCount[layer];
 	for(int x = 0; x < vertexCountOrig; x++){
 //		printf("lel %d %d\n", x, vertexCount[layer]);
 		ind1 = x;//FIXME
@@ -88,7 +88,7 @@ void cropNodesLayer(int layer){
 		}
 	}
 	node *other, *this;
-	for(int x = 0; x < vertexCount[layer]; x++){
+	for(int x = 0; x < nodeCount[layer]; x++){
 		for(int y = 0; y < nodeList[layer][x].sibCount; y++){
 			this = &(nodeList[layer][x]);
 			other = &(nodeList[layer][this->sibs[y]]);

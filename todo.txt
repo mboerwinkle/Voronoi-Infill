@@ -1,11 +1,6 @@
 make lineCount and lineList not have unused indeces on uncalculated z coords
 make sortPointList operate based on x or y variation and not distance (for speed)
-add in dynamic nodes.
-break crop Nodes into separate files
-fix dat thing where the display doesnt display every line
 make ORBitarray test suite
 make genBitarray/setBit/getBit macros?
-make binary search layer gen
-make calcCenter directly create nodes
 make sure functions are passed by reference
 make sure functions decrement to 0, not increment to a value(to check if neccessary)
