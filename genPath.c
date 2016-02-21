@@ -3,8 +3,9 @@
 #include "globals.h"
 #define HEIGHT 750//these either
 #define WIDTH 750
-#define EXTRUSION_CONSTANT 0.1//approx
-extern void drawLine(int x1, int y1, int x2, int y2);//this should not be here
+#define SCALE 0.25
+#define EXTRUSION_CONSTANT 0.0282//mm filament extruded per mm moved
+#define HEAD_STEP 0.2//amount to raise head every layer
 extern int getNextClosest(int layer, point2d currPos, int *closest);//returns 1 if connections still need to be made, puts index of closest node to currPos into closest
 long int E = 0;
 
@@ -47,16 +48,18 @@ void freeLocStack(){
 void genPath(){
 	point2d head = {0, 0};
 	node* nodeLayer;
+	double headHeight = 0;
 	FILE *wfp = fopen("output.gcode", "w");//write file pointer
 	int index, oldIndex, connectionIndex;
 	for(int layer = 0; layer < maxz; layer+=step){
 		nodeLayer = nodeList[layer];
+		headHeight+=HEAD_STEP;
 		while(getNextClosest(layer, head, &index)){
 			locStack = NULL;
 			//print out gcode to move to new location without extruding
 
 
-			fprintf(wfp, "G01 F6000\nG01 X%.2lf Y%.2lf Z%.2lf\nG01 F1800\n", ((double)nodeLayer[index].loc[0]-2000)/100, ((double)nodeLayer[index].loc[1]-2000)/100, (((double)layer)/100));
+			fprintf(wfp, "G01 F6000\nG01 X%.3lf Y%.3lf Z%.3lf\nG01 F1800\n", ((double)nodeLayer[index].loc[0])/100*SCALE, ((double)nodeLayer[index].loc[1])/100*SCALE, headHeight);
 
 			addToLocStack(index);
 			while(1){
@@ -69,7 +72,7 @@ void genPath(){
 					}else{
 						index = regressLocStack();
 						//print out gcode to move to new location without extruding
-						fprintf(wfp, "G01 F6000\nG01 X%.2lf Y%.2lf Z%.2lf\nG01 F1800\n", ((double)nodeLayer[index].loc[0]-2000)/100, ((double)nodeLayer[index].loc[1]-2000)/100, (((double)layer)/100));
+						fprintf(wfp, "G01 F6000\nG01 X%.3lf Y%.3lf Z%.3lf\nG01 F1800\n", ((double)nodeLayer[index].loc[0])/100*SCALE, ((double)nodeLayer[index].loc[1])/100*SCALE, headHeight);
 					}
 				}else{
 					oldIndex = index;
@@ -112,7 +115,7 @@ void genPath(){
 					head[1] = nodeLayer[index].loc[1];
 
 					E += distance2d(head, nodeLayer[oldIndex].loc);
-					fprintf(wfp, "G01 X%.2lf Y%.2lf Z%.2lf E%.3lf\n", ((double)head[0]-2000)/100, ((double)head[1]-2000)/100, (((double)layer)/100), ((double)E)/100*EXTRUSION_CONSTANT);
+					fprintf(wfp, "G01 X%.3lf Y%.3lf Z%.3lf E%.4lf\n", ((double)head[0])/100*SCALE, ((double)head[1])/100*SCALE, headHeight, ((double)E)/100*EXTRUSION_CONSTANT*SCALE);
 				}
 			}
 		}
