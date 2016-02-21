@@ -5,7 +5,11 @@ line2d **lineList;
 int *lineCount;
 //taking line defined by a and b, sets ret equal to a line segment that follows the line and is inside of max. returns 0 on success, returns 1 if ray does not intersect valid field.
 extern int genLineInBounds(line2d* ret, point2d orig, scalar x, scalar y);
+bitarray closedPoints;
+bitarray currentPoints;
 void calcLines(){
+	closedPoints = genBitarray(points);
+	bitarray lastLayer = NULL;
 	lineList = calloc(maxz, sizeof(line2d*));
 	lineCount = calloc(maxz, sizeof(int));
 	int layer = 0;
@@ -19,7 +23,9 @@ void calcLines(){
 		lineList[layer] = malloc(sizeof(line2d));
 		lineCount[layer] = 0;
 		for(i1 = 0; i1 < points; i1++){//getting combinations of indeces.
+			if(getBit(closedPoints, i1)) continue;
 			for(i2 = i1+1; i2 < points; i2++){
+				if(getBit(closedPoints, i2)) continue;
 				p1 = &(pointList[i1]);
 				p2 = &(pointList[i2]);
 				if(planeIntersect(layer, *p1, *p2, mid)){//the two points are on top of each other
@@ -39,6 +45,15 @@ void calcLines(){
 		}
 		lineList[layer] = realloc(lineList[layer], sizeof(line2d)*lineCount[layer]);
 		cropLines(layer);
+		if(lastLayer != NULL){
+			for(int x = 0; x < points; x++){
+				if(getBit(lastLayer, x) && !getBit(currentPoints, x)){
+					setBit(closedPoints, x, 1);
+				}
+			}
+			free(lastLayer);
+		}
+		lastLayer = currentPoints;
 	}
 	printf("\n");//needed after the progress bar
 }

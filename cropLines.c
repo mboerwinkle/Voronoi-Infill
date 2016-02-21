@@ -4,7 +4,12 @@
 //determines if the two line segments can intersect in the square. designed in order to avoid problems with near-parallel lines overflowing scalars when their intersection point was calculated.
 int sideRay(point2d targ, line2d ray);
 
+extern bitarray closedPoints;
+extern bitarray currentPoints;
+
+
 void cropLines(int layer){
+	currentPoints = genBitarray(points);
 	int i1, i2;
 	int count = lineCount[layer];
 	point2d* interList;//this is the list of all intersections by lines that share a parent 
@@ -82,6 +87,8 @@ void cropLines(int layer){
 				newlayerlist[newCount].parents[1] = layerlist[i1].parents[1];
 				newCount++;
 				newlayerlist = realloc(newlayerlist, sizeof(line2d)*(newCount+1));
+				setBit(currentPoints, layerlist[i1].parents[0], 1);
+				setBit(currentPoints, layerlist[i1].parents[1], 1);
 				break;
 			}
 		}

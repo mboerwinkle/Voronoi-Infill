@@ -64,8 +64,8 @@ void genPoints(){
 			yoffsetStart = (int)(distpoints*UP);
 		}else yoffsetStart = 0;
 		yoffset = yoffsetStart;
-		for(x = 0; x < maxx; x+=distpoints/2){
-			for(y = yoffset; y < maxy; y+=2*distpoints*SIN){
+		for(x = -maxx/8; x < maxx+(maxx/8); x+=distpoints/2){
+			for(y = yoffset-(maxy/8); y < maxy+(maxy/8); y+=2*distpoints*SIN){
 				points++;
 				pointList = (point3d*)realloc(pointList, points*sizeof(point3d));
 				pointList[points-1][0] = x;
@@ -77,7 +77,7 @@ void genPoints(){
 			}else yoffset = yoffsetStart;
 		}
 	}
-	//pushPoints(maxx/8, maxy/8, 5000);
+//	pushPoints(maxx/10, maxy/10, 12000);
 	printf(" points: %d\n", points);
 }
 void pushPoints(scalar x, scalar y, double strength){
@@ -85,16 +85,17 @@ void pushPoints(scalar x, scalar y, double strength){
 	point2d center = {x, y};
 	point2d pnt;
 	double newDist;
-	double distMult;
 	double oldDist;
+	double distMult;
 	for(int temp = 0; temp < points; temp++){
 		pnt[0] = pointList[temp][0];
 		pnt[1] = pointList[temp][1];
 		oldDist = distance2d(pnt, center);
-		distMult = -1/((oldDist/strength)+1)+1;
-		newDist = (2-distMult)*oldDist;
-		vx = (newDist*(pnt[0]-x))/oldDist;
-		vy = (newDist*(pnt[1]-y))/oldDist;
+		if(oldDist >= strength) continue;
+		distMult = sin(((double)oldDist*M_PI/2)/strength);
+		newDist = oldDist*distMult;
+		vx = (newDist*(double)(pnt[0]-x))/oldDist;
+		vy = (newDist*(double)(pnt[1]-y))/oldDist;
 		pointList[temp][0] = x+vx;
 		pointList[temp][1] = y+vy;
 	}
